@@ -34,6 +34,7 @@ Item names appear on hover or selection. Phones use finger dragging and landscap
 
 ## Project documents
 
-- [AGENT.md](AGENT.md): collaboration and learning preferences.
+- [AGENTS.md](AGENTS.md): collaboration and learning preferences.
 - [JOURNAL.md](JOURNAL.md): development history and full design decisions, including spoilers.
+
 

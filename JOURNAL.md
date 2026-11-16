@@ -180,3 +180,9 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - Added AGENTS.md as a short entry point pointing to AGENT.md.
 - Documentation reviewed against this conversation. Game behavior remains planned and untested.
 
+
+### Agent filename correction
+- User clarified that AGENT.md was a typo and intended AGENTS.md.
+- Consolidated the complete working agreement into AGENTS.md, removed AGENT.md, and updated the README link.
+- The earlier four-file documentation commit was verified on GitHub as 7feb674 before this correction.
+
