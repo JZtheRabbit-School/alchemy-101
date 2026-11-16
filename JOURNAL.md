@@ -186,3 +186,165 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - Consolidated the complete working agreement into AGENTS.md, removed AGENT.md, and updated the README link.
 - The earlier four-file documentation commit was verified on GitHub as 7feb674 before this correction.
 
+
+## 2026-11-15 — first local playable prototype
+
+### Authorization
+- User requested building the prototype for inspection and adjustment.
+- Explicitly prohibited GitHub commits/pushes for this phase. All prototype code and documentation changes remain local. No deployment, commits, or pushes were performed.
+
+### Implementation
+- Added buildless HTML/CSS/JavaScript game, Node static server, and Node built-in test suite. No package installation required.
+- Separated recipe/inventory/player state (game.js), item art (art.js), descriptions, UI/effects (app.js), and styling.
+- Added all 63 items and expanded slash-alternative recipes. Unordered mixing, same-item reduction, slot reservation, consumable materials, and persistent basic sources implemented.
+- Added manual result storage/discard, duplicate slots, silent animated failure returns, mouse/finger pointer dragging, and landscape prompt for phones.
+- Added title/intro screens; moss-green basement, 4x7 lunar shelf, large beaker, separate basic shelf, portrait hardcover and trashcan. No Elixir sign or objective.
+- Added alphabetic name catalog, linked ingredient pages, known recipes only, history/back navigation, entry transition, illustrated entries, and draft factual/dark-humor descriptions. Sand uses the approved text.
+- Added discovery feedback and hidden GREAT ALCHEMIST trigger.
+- Added contextual drinking, empty Glass/Pot, visions/blackout, unskippable word-by-word Love Potion sequence, vampire changes/restrictions, explosion/death, and restart.
+- Session storage restores inventory, recipes, player status, and a pending drinking sequence. Refreshing during a sequence replays that sequence rather than skipping its outcome.
+- Added reduced-motion treatment for distortion; timing and blackout remain.
+
+### Explicit prototype assumptions / review points
+- Two separate Elixirs provisionally labeled Elixir(?) · I and Elixir(?) · II, with the same provisional illustration; final distinct appearance/names need review.
+- Items without user-specified drinking behavior (Molotov Cocktail and frog containers) are not drinkable.
+- Drafted new entry descriptions and Love Potion narrative for user review; these are not previously approved prose.
+- Cupid, hallucinations, room details, item icons, and explosion are preliminary CSS/SVG representations. They are simpler than generated concept paintings. No sound added.
+- Introduction uses the previously suggested brief copy with a Continue control.
+
+### Verification
+- Seven Node tests passed: 63-item count/reachability and unordered/conflict-free recipes; consumption/result blocking; failed exact-slot returns; full shelf/withdrawal; identical-item reduction; vampire restrictions and restricted-result recipe invariant; drinking/container/effect/death state changes.
+- app.js syntax check passed. Local server returned HTTP 200 after restarting it outside the socket-restricted sandbox.
+- Built-in browser verified title -> intro -> basement; dragged Fire + Earth -> Magma; stored Magma; moved it into beaker with Air -> Stone; stored/reused Stone; Stone + Water failed and returned Stone to original shelf slot.
+- Browser verified discovered-name catalog, Stone entry showing only the tried Magma + Air recipe, and clickable Air ingredient opening its own entry.
+- Refresh restored the stored Stone and current run. Drinking Magma displayed only You died. and try again?; try again? cleared the experiment.
+- Inspected desktop (1280x720) and phone landscape (844x390) layouts; viewport restored afterward.
+- Not verified on actual touchscreen hardware. Full browser playthrough, all drink animations, hidden achievement visual, and individual art fidelity still need player review; logic tests are not a substitute for those checks.
+- npm command was unavailable, so tests run directly through node. The package scripts remain optional convenience commands.
+- Preview left running at http://127.0.0.1:4173 for user inspection. Fresh empty inventory left after browser checks.
+
+## 2026-11-15 — restore the approved illustrated art direction
+
+- User pointed out that the first playable prototype had drifted from the two approved concept images. Requested restoring their art style.
+- Replaced smooth CSS furniture surfaces and geometric item icons with generated, textured ink/stipple/watercolor artwork: cracked moss-green plaster, detailed dark wood, dried herbs, stained cloth, aged leather and parchment.
+- Used the built-in image generation tool with both user-provided images as visual references. Added project-local assets/basement-illustrated.png, assets/journal-illustrated.png, and assets/items-illustrated.png. Prompt briefs and asset usage are in assets/ART.md.
+- Added illustrated.css to position transparent live controls over the painted room. Re-aligned all 28 slots, four permanent element cards, beaker, journal, and trashcan. Maintained whole-room 16:9 proportions with letterboxing rather than stretching the artwork.
+- Replaced item rendering with the 8x8 illustrated sprite atlas, also used on journal entries and drag ghosts. Original vector code remains only as a fallback for unknown items.
+- Kept all established omissions: no Elixir sign, completion counter, or page numbers. Journal remains an alphabetical list, with illustrations left and description/known recipes right. Existing gameplay rules unchanged.
+- Verification: all seven game-logic tests passed after the visual changes; art.js syntax check passed. Browser checked updated room/book, dragged Fire and Earth to create Magma, stored it in the first painted shelf slot, and opened its textured journal entry showing its tried recipe.
+- Corrected an SVG overflow issue found during browser inspection so the atlas is clipped to the selected item.
+- Saved room and journal screenshots for user review. Browser left on updated room with the verification Magma stored. The individual sprite drawings remain generated first-pass assets and have not all received close-up review.
+- README and this journal updated locally. No GitHub commit, push, or deployment; user's hold remains in effect.
+
+## 2026-11-15 — moon symbol correction
+
+- User requested replacing the odd shelf moon shapes with the clean 28-symbol sequence in their second reference, in its reading order.
+- Replaced the overlapping ellipse construction with a single illuminated hemisphere/terminator shape. Sequence begins full, darkens from the right through left half and left crescent to dark, then illuminates from the right back toward full.
+- Applied the reference reading order left-to-right, top-to-bottom to the existing 4x7 shelf. Pale ivory and near-black preserve contrast against the wooden cubbies.
+- Verified art.js syntax and visually inspected the reloaded local browser. Gameplay and current run were preserved. No commit or GitHub push.
+
+## 2026-11-15 — illustration review sheets
+
+- User requested an out-of-game view matching every item name to its current illustration, to identify desired changes.
+- Created three numbered contact sheets (items 1–21, 22–42, 43–63) in the chat visualization folder, using the current atlas and the same crop as art.js. Names follow ITEMS in game.js.
+- Inspected all three sheets. These are review artifacts only; no game art, rules, or inventory was changed. No GitHub commit or push.
+
+## 2026-11-16 — container clarifications and revised illustration previews
+
+### Confirmed design revisions (not yet implemented in game logic)
+- Magma should flow as molten liquid rather than resemble a solid rock.
+- Pot and every pot-based item use unglazed clay pottery, not metal cookware.
+- Glass is renamed Glass Pane; Bottle is renamed Glass Vessel. The vessel shape follows the user's supplied right-hand vodka bottle, without a label. Vodka gets the same shape with a VODKA label.
+- Drinking contained liquids leaves Glass Vessel/Pot if the player survives, rather than the flat pane.
+- Frog containers contain actual frogs without water or eggs. The opaque pot conceals the frog. Either frog container + Stone yields Frog, consuming Stone and the container.
+- Remove the branch from Lichen and all stalks/sticks from Moss. Vase is a plain vase holding flowers.
+- Loose Blood, Cursed Blood and Sacred Blood are standalone liquid drops in red, purple and gold. Each has a glass-vessel and pottery-pot version: six added discoveries, proposed total 69. GREAT ALCHEMIST should use the revised total when implemented.
+- Loose blood remains drinkable. Contained blood has its corresponding drink effect and leaves the empty container for surviving players; contained versions also satisfy recipes requiring that blood.
+- Love Potion and Gu Poison supply the glass container for the two Elixirs.
+- Container descriptions should use the user's blunt joke: A glass/pot of XXX. What were you expecting? You literally just poured XXX into a glass/pot.
+
+### Generated review assets
+- User explicitly requested revised illustrations and preview before implementation.
+- Generated 28 revised item illustrations with the built-in image generator, using the existing atlas as a style reference and the supplied vodka drawing as a bottle-shape reference. Kept stippled ink and muted watercolor style.
+- Saved non-destructively under assets/revisions-2026-11-16/: items-revised.png, prompt.txt (exact generation prompt), labels.json, all-labels.json, two changes sheets and three complete proposed collection sheets.
+- Numbering preserves original 1–63 and appends blood-container discoveries as 64–69.
+- The pot of frog has a small incised frog motif for identification; this is a proposed visual choice, not previously requested. Frog remains hidden inside.
+- Inspected both revised sheets and all three proposed collection sheets. Adjusted preview crop framing to keep bottle caps intact and exclude neighboring cells.
+- Preview assets only: active gameplay, current art mapping and 63-item game data are unchanged pending review. No commit, push or deployment.
+
+## 2026-11-16 — Vine, Grape, Pulp, Wine and Jesus art
+
+- User confirmed Plant + Sand = Vine; Vine + Water = Grape; Grape + Blender = Pulp; Pulp + A Glass of Water = Wine; Bread + Wine = Jesus; Jesus + Unicorn = Sacred Blood.
+- Jesus + Unicorn replaces feeding Unicorn Bread/Broth. Five new discoveries bring the proposed collection from 69 to 74; Sacred Blood is an existing item.
+- Generated five matching illustrated items with the built-in image tool. Wine uses the reference-shaped bottle with a small grape etching as a proposed distinguishing detail. Jesus is a full-body robed figure with a small halo.
+- Saved transparent strip, labeled preview, exact prompt and recipe notes under assets/vine-chain-2026-11-16/.
+- Reviewed generated strip for all five requested subjects. This is an art/design review only: no active webpage recipe/art changes, commit, push or deployment.
+
+## 2026-11-16 — holy objects and raisin illustration review
+
+- Confirmed six new items: Cross, Holy Water, A Glass of Holy Water, A Pot of Holy Water, Raisins, Raisins Bread. Proposed total becomes 80.
+- Recipes and vampire clarifications are preserved in assets/holy-chain-2026-11-16/README.md, including pouring holy water into vessels, full usability of contained holy liquids, fatal holy drinks for vampires, and Unicorn remaining non-holy.
+- Also confirmed Vine + Flies = Flower; Grape + Earth = Vine; Frog + Flies = Frog.
+- Generated six matching stippled ink/watercolor illustrations with the built-in image generator; exact prompt, source atlas and numbered recipe preview saved under assets/holy-chain-2026-11-16/.
+- Used small halo/glint/cross details to visually distinguish holy liquid variants; these are proposed art details for review.
+- Inspected generated artwork and labeled preview. Active prototype and gameplay remain unchanged. No commit, push or deployment.
+
+## 2026-11-16 — integrate all approved art and expand playable game to 80 items
+
+### Implemented locally
+- Integrated the 28 revised sprites, five Vine-chain sprites, and six holy/raisin sprites into the live game with stable name-to-sprite coordinates. Artwork no longer depends on item-array order. Added build-art-map.mjs and generated art-map.js.
+- Glass Pane and Glass Vessel are now the real game names; legacy saved inventory, mixing contents, discoveries and recipe keys migrate on refresh. Removed the obsolete Unicorn feeding recipe from migrated history.
+- Added six blood containers and three Holy Water forms, liquid filling, all vine/grape/pulp/wine/Jesus/cross/raisin recipes, frog-container breaking and Frog eating Flies. Replaced Unicorn + Bread/Broth with Jesus + Unicorn for Sacred Blood.
+- All contained blood forms substitute in blood recipes. The journal records only the actual tried ingredients. Both inputs are consumed and one result remains in the beaker, including frog rescue and feeding recipes.
+- Drinking uses contents and vessel separately. Containers remain for surviving drinks; Blood alone or contained causes vampirism; Cursed Blood variants explode; Sacred Blood/Holy Water kill vampires; ordinary players survive Holy Water. Potion, Love Potion and Vodka return Glass Vessel; Broth returns Pot. No Wine drinking effect was specified, so Wine is mixable but has no Drink option for now.
+- Expanded vampire restrictions to Jesus, Cross, loose Holy Water and loose Sacred Blood, alongside the existing hot items. Contained holy liquids, Elixirs and Unicorn remain touchable. Restored the subtle red overlay above the painted basement.
+- Added factual/dark-humor descriptions for new items and the requested blunt container descriptions. Existing Elixir generic descriptions remain. Hidden GREAT ALCHEMIST now requires all 80 discoveries; no visible total or objective added.
+
+### Verification
+- Fifteen Node tests passed: all 80 items reachable; unordered recipes have no conflicting outputs; inventory/result blocking; slot returns; identical-item reduction; containers and substitute blood recipes; frog rescue/eating consumption; holy vampire touch/drink rules; empty vessels after effects; complete artwork/description coverage; and legacy save migration.
+- Checked app.js syntax. Verified actual source image dimensions before generating atlas coordinates.
+- Browser checked all new illustration families in a separate development fixture tab. Found and fixed neighboring sprite leakage for tall/rectangular source crops using explicit SVG clipping.
+- Browser dragged Holy Water + Glass Vessel into a contained result, then verified ordinary-player drinking leaves Glass Vessel. Vampire fixture verified Cross stays stuck/crossed out, contained holy liquid can enter beaker, and drinking it displays You died. and try again?.
+- Browser inspected the expanded alphabetical catalog and Wine entry with its new art, description and tried Pulp + A Glass of Water recipe.
+- Fixture states were isolated to a separate tab and closed after checks. Reloaded the user's original game tab and preserved their Stone/inventory and discoveries. No artificial discoveries were added to their run.
+- Local README instructions updated. Real touchscreen hardware, complete visual review of every item, and a full manual 80-item playthrough remain unverified.
+- No GitHub commit, push or deployment. User's local-review hold remains active.
+
+## 2026-11-16 — allow immediate beaker chaining
+
+- User revised the earlier mandatory store/discard rule: newly created results must be usable as the first ingredient of the next recipe immediately, without a shelf round trip.
+- Removed result blocking in addIngredient while preserving death, effect, capacity and vampire touch restrictions.
+- Failed chaining keeps the previous result in the beaker and sends only the added ingredient back to its original shelf slot or basic source. Ordinary failures between two newly added ingredients still return both. Return animation preserves the retained result; failure state is saved immediately.
+- Updated instruction text and README to describe chaining. Empty containers left by drinking can also be reused directly.
+- Added regression checks for Clay -> Pot chaining, full shelves, save recovery, stored ingredient consumption, recipe records, and both kinds of failed-chain returns. All 19 tests passed; app.js syntax passed.
+- Browser verified Water + Earth -> Clay, failed Clay + Air retaining Clay, then Fire added directly -> Pot, with no shelf transfers. Separate QA tab was closed, original game tab reloaded without altering its run.
+- This supersedes earlier journal statements requiring results to be cleared before further mixing. No commit, push or deployment.
+
+## 2026-11-16 — catalog pagination and alphabetical page flipping
+
+- User requested one Catalog title on the first left page, no Discoveries/Observations subtitles, first page holding 10 items, then 12 items on every following page. Small collections now stay entirely on the left until the first page fills.
+- Added bottom previous/next controls: catalog mode turns two-page spreads; item mode visits discovered entries in alphabetical order. Controls disable at the first/last boundary and do not wrap. No visible page numbers or totals.
+- Catalog tab/back navigation preserve the catalog spread from which the item was opened. New book opening starts at the first spread. Entry links and back history remain functional.
+- Added pure journal.js pagination/navigation helpers and three regression tests for small catalogs, all 80 items across [10,12,12,12,12,12,10] pages without gaps, and alphabetical neighbors.
+- All 22 tests passed; app.js syntax check passed.
+- Browser verified the user's five discoveries appear left-only with right blank; Air -> Earth -> Fire via Next. In an isolated full-collection fixture, verified first spread has 10 left/12 right and next spread has 12 on each page with sequential contents. Test tab closed; user's Catalog left open and run preserved.
+- Updated local README and JOURNAL. No GitHub commit, push or deployment.
+
+## 2026-11-16 — reduce first catalog page to eight
+
+- User requested 8 entries on the first left Catalog page instead of 10. All following pages remain at 12.
+- Updated pagination, first-page row spacing, README and pagination regression expectations. Supersedes the preceding ten-item first-page decision.
+- Ran journal pagination tests successfully. No GitHub commit or push.
+
+## 2026-11-16 — inset catalog labels
+- User requested moving catalog words/buttons away from the outer paper edge. Added a responsive left inset to both pages' catalog lists and a small button-text inset. Pagination and entry pages are unchanged. No commit or push.
+
+
+## 2026-11-16 — end-of-session GitHub backup
+
+- User ended the session and explicitly authorized pushing the current version to GitHub, superseding the earlier hold for this snapshot.
+- Initialized the existing local project as a Git checkout, fetched origin/main, and based the local branch on the remote documentation history without replacing working files.
+- Prepared the complete playable 80-item prototype, illustrated assets and review sheets, recipe/drinking/vampire updates, immediate beaker chaining, eight-item-first-page catalog, alphabetical page controls, spacing correction, tests and documentation for one source commit.
+- All 22 Node tests passed before commit. This is a source backup to GitHub, not a public website deployment.
+- Remaining discussion: Wine's drinking behavior has not been specified, so Wine is not drinkable. Real touchscreen testing, a full manual 80-item playthrough, and final prose/animation timing review remain future work.
+- Ask at session close what the user still cannot explain about the game or changes. No further design answer is required to save this snapshot.

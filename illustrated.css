@@ -1,0 +1,34 @@
+/* Painted surfaces with transparent, live interaction regions above them. */
+body{display:flex;align-items:center;justify-content:center;min-height:100dvh;background:#141b13}
+.room{width:min(100vw,177.7778dvh);height:min(100dvh,56.25vw);min-height:0;flex:none;background:url('assets/basement-illustrated.png') center/100% 100% no-repeat}
+.room:before,.room:after,.wall-crack,.cabinet-crown,.cabinet-feet,.table-top,.table-leg,.cloth,.candle,.book-ledge{display:none}
+header{inset:2.3% 3% auto}.room-label{display:none}#restart{background:#d7c6a0 url('assets/journal-illustrated.png') 20% 40%/700% auto;border:2px solid #55432d;border-radius:3px;box-shadow:2px 3px #201e1777}
+.cabinet{left:8.9%;top:15.5%;width:24%;height:71.8%;background:none;border:0;box-shadow:none}
+.shelf{background:none;gap:8px;padding:0}.slot{background:none;border:0;box-shadow:none}.slot:after{display:none}.slot.reserved{background:#100d0866}.slot .moon{top:4px;left:5px;opacity:.95;width:13px;height:13px;filter:drop-shadow(0 1px 1px #000)}.slot.drop-hover{background:#ddc78b22;border-radius:2px;outline:1px solid #dfca8f99}
+.item{width:88%;height:83%;filter:drop-shadow(1px 3px 1px #0d120e88)}.item svg{max-width:none;max-height:none}.item.selected:after{border-color:#d1b47b99}.item.forbidden.selected:before{inset:5%}
+.workbench{left:35%;top:18%;width:38%;height:68%}.beaker{left:14%;top:4%;width:61%;height:74.7%;border:0;background:none;box-shadow:none;border-radius:8% 8% 14% 14%}.beaker:after,.rim,.glass-reflection,.graduations{display:none}.beaker.drop-hover{background:#e7d79a0d;box-shadow:inset 0 0 25px #d6c18f44}.beaker #contents{inset:12% 4% 7%}.beaker #contents .item{height:57%;width:78%}#discovery{top:-6%;font-size:clamp(19px,2.1vw,30px);text-shadow:1px 2px #1c1e16}#drink{right:1%;top:48%;background:#d5c39d url('assets/journal-illustrated.png') 30% 40%/600% auto;border:2px solid #62472e;color:#493b28;border-radius:3px}
+.right-side{right:4%;width:20%;top:15%;height:72%}.basics-wrap{position:absolute;left:1%;top:4.8%;width:99%;height:15.4%;background:none;border:0;padding:0;box-shadow:none}.basics-wrap:before{display:none}.basics{height:100%;gap:9px}.base-slot{height:100%;background:none;border:0;box-shadow:none}.base-slot .item{width:85%;height:84%;filter:drop-shadow(0 1px 1px #5a482744)}
+.closed-book{top:28.7%;left:17.5%;width:64%;height:40.4%;border:0;box-shadow:none;background:none;transform:none;padding:0;border-radius:4px}.book-border{border:0;padding:12% 5%;color:#d1b074;justify-content:flex-start}.book-border small,.cover-moon{display:none}.book-border em{font-size:clamp(11px,1.5vw,23px);text-shadow:1px 1px #351b13;transform:rotate(-1deg)}.closed-book.unread{animation:painted-book-glow 2s infinite alternate}.trash{top:80%;left:25.5%;width:55.5%;height:33.3%;border-radius:30%}.trash span{display:none}.trash.drop-hover{background:#e3d5a51a;box-shadow:0 0 10px #e3d5a533}
+footer{bottom:1.2%;font-size:clamp(10px,1vw,14px);text-shadow:1px 1px 3px #000;color:#e5d4ae;background:#121a1266;padding:5px 9px;border-radius:2px;left:3%;right:auto;gap:40px}
+.journal-overlay{background:#152016c9 url('assets/basement-illustrated.png') center/cover;backdrop-filter:blur(4px)}.journal-overlay:before{content:'';position:absolute;inset:0;background:#131b12a3;backdrop-filter:blur(2px)}
+.open-book{position:relative;width:min(90vw,113.333dvh);height:auto;aspect-ratio:4/3;max-height:none;background:url('assets/journal-illustrated.png') center/100% 100%;border:0;border-radius:18px;box-shadow:0 14px 55px #0008;isolation:isolate;padding:5.5% 4.3% 6.2%}
+.page{background:none;border:0;border-radius:0;box-shadow:none;padding:2% 4%;scrollbar-color:#9b8050 transparent}.page h2{font-family:'IM Fell English',Georgia,serif;font-size:clamp(26px,3vw,43px);font-weight:400;color:#493d27}.page h2:after{color:#944e3e;font-size:17px;opacity:.85}.page p{font-size:clamp(14px,1.55vw,21px);color:#493f2b}.page .specimen{height:66%}.specimen svg{width:96%;height:96%;filter:drop-shadow(1px 3px 1px #8b714222)}.page h3{border-color:#ad7051;color:#493c28;font-size:clamp(17px,1.8vw,24px)}.recipe{font-size:clamp(14px,1.4vw,19px);margin:16px 0}.recipe button{color:#88472f}.catalog-list button{border-bottom:1px solid #8a6b3b30;color:#4e402b}.catalog-list button:hover{background:#966e3020}.catalog-tab,.book-back{background:#d5c39d url('assets/journal-illustrated.png') 20% 40%/700% auto;color:#704533;border:2px solid #735135;border-radius:4px;font-size:17px}.close{color:#e1d1b1;z-index:3}.title-screen{background:linear-gradient(#132014c9,#142016e8),url('assets/basement-illustrated.png') center/cover}.title-screen:before{border-color:#c5a16e55}.title-screen button{background:#c9b58a url('assets/journal-illustrated.png') 25% 40%/700% auto;color:#493b28}
+@keyframes painted-book-glow{to{box-shadow:0 0 26px #e9c07888;background:#c49e3b10}}
+@media(max-height:500px){.slot .moon{width:9px;height:9px;top:2px;left:2px}.shelf{gap:5px}.basics{gap:6px}#restart{padding:4px 10px;font-size:12px}.book-border em{font-size:12px}.open-book{padding:5.5% 4.3% 6.2%}.page{padding:0 4%}.page h2{font-size:24px;margin-bottom:8px}.page h2:after{margin-top:6px;font-size:12px}.page p{font-size:13px;line-height:1.5}.page h3{font-size:16px;margin-top:12px}.recipe{font-size:12px;margin:9px 0}.catalog-list button{font-size:13px;padding:5px 0}.catalog-tab,.book-back{font-size:13px;padding:4px 8px}.catalog-tab{left:3%}.book-back{left:calc(3% + 80px)}.page .specimen{height:64%}footer{padding:3px 6px;font-size:10px}}
+
+header{justify-content:flex-end}.item svg,.specimen svg,#drag-ghost svg,.return-ghost svg{overflow:hidden}
+
+.room.vampire:before{display:block;background:#901b2326;box-shadow:inset 0 0 100px #0c070980;pointer-events:none}
+
+
+.page-arrow{position:absolute;bottom:2%;z-index:4;background:#d5c39d url('assets/journal-illustrated.png') 20% 40%/700% auto;color:#704533;border:2px solid #735135;border-radius:4px;font-size:26px;padding:4px 17px;min-width:50px}
+.page-arrow.previous{left:4%}.page-arrow.next{right:4%}.page-arrow:disabled{opacity:.25;cursor:default;filter:none}
+.open-book.catalog-mode .page{display:flex;flex-direction:column;overflow:hidden}
+.catalog-mode .catalog-list{display:grid;grid-template-rows:repeat(var(--rows),minmax(0,1fr));gap:0;flex:1;min-height:0}
+.catalog-mode .catalog-list button{min-height:0;padding:2px 0;font-size:clamp(11px,1.3vw,18px);line-height:1.1;overflow-wrap:anywhere}
+.catalog-mode .page h2{flex:none;margin-bottom:12px}
+@media(max-height:500px){.page-arrow{bottom:1%;font-size:19px;padding:2px 12px}.catalog-mode .catalog-list button{font-size:11px;padding:0}.catalog-mode .page h2{font-size:22px;margin-bottom:6px}.catalog-mode .page h2:after{display:none}}
+
+/* Inset catalog labels from the worn paper edges on both pages. */
+.catalog-mode .catalog-list{margin-inline:clamp(10px,1.8vw,26px) 4px}
+.catalog-mode .catalog-list button{padding-inline:6px}

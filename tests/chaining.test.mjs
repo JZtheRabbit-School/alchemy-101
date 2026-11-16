@@ -1,0 +1,7 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {fresh,addIngredient,storeMix,discard,migrate,key} from '../game.js';
+function clay(){const s=fresh();addIngredient(s,'Water');addIngredient(s,'Earth');return s;}
+test('failed chaining returns only incoming base and keeps result',()=>{const s=clay();const r=addIngredient(s,'Air');assert.equal(r.type,'failed');assert.deepEqual(r.returning,[{item:'Air',origin:null}]);assert.deepEqual(s.mix,[{item:'Clay',origin:null}]);assert(s.result);assert.equal(addIngredient(s,'Fire').item,'Pot');});
+test('failed chaining restores incoming stored ingredient to its exact slot',()=>{const s=clay();s.slots[17]='Stone';const r=addIngredient(s,'Stone',17);assert.equal(r.type,'failed');assert.equal(s.slots[17],'Stone');assert.equal(s.mix[0].item,'Clay');assert.equal(r.returning.length,1);assert(storeMix(s,2));assert.equal(s.slots[2],'Clay');});
+test('chaining works with full shelf and after save recovery',()=>{let s=clay();s.slots.fill('Stone');s=migrate(JSON.parse(JSON.stringify(s)));assert.equal(addIngredient(s,'Fire').item,'Pot');assert.equal(storeMix(s,0),false);assert.equal(s.mix[0].item,'Pot');assert(discard(s,'mix'));});
+test('stored incoming ingredient is consumed in successful chain and recipe recorded',()=>{const s=fresh();addIngredient(s,'Fire');addIngredient(s,'Earth');s.slots[4]='Air';assert.equal(addIngredient(s,'Air',4).item,'Stone');assert.equal(s.slots[4],null);assert(s.known.includes(key('Magma','Air')));});

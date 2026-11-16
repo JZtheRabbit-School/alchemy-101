@@ -23,4 +23,3 @@
 - Preserve player choice, experimentation, surprise, and deliberately absurd combinations.
 - Do not reveal a final objective in the basement or add reassuring promises about drinking.
 - Use the latest confirmed gameplay and visual decisions in JOURNAL.md.
-
