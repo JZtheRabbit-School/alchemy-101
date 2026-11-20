@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Alchemy 101</title><link rel="stylesheet" href="style.css"></head>
 <body>
-<main id="room" class="room">
+<main id="room" class="room"><div class="book-art-adjustment" aria-hidden="true"><svg viewBox="1280 320 340 350"><defs><clipPath id="book-patch"><rect x="1280" y="320" width="340" height="350"/></clipPath></defs><image clip-path="url(#book-patch)" href="assets/basement-illustrated-v4.png" width="1672" height="941"/></svg></div>
   <div class="wall-crack crack-one"></div><div class="wall-crack crack-two"></div>
   <header><span class="room-label">THE BASEMENT</span><button id="restart" class="quiet">Restart ↻</button></header>
   <section class="cabinet" aria-label="Shelf A"><div class="cabinet-crown"></div><div id="shelf" class="shelf"></div><div class="cabinet-feet"></div></section>
   <section class="workbench" aria-label="Mixing area"><div id="discovery" aria-live="polite"></div><div id="beaker" class="beaker" data-drop="beaker"><div class="rim"></div><div class="graduations"><i></i><i></i><i></i><i></i><i></i></div><div id="contents"></div><div class="glass-reflection"></div></div><button id="drink" hidden>Drink</button><div class="table-top"></div><div class="table-leg left"></div><div class="table-leg right"></div><div class="cloth"></div><div class="candle"><span></span></div></section>
-  <aside class="right-side"><section class="basics-wrap" aria-label="Shelf B"><div id="basics" class="basics"></div></section><button id="book" class="closed-book" aria-label="Open discoveries"><span class="book-border"><small>✦</small><em>Discoveries</em><span class="cover-moon">☾</span><small>❧</small></span></button><div class="book-ledge"></div><button id="trash" class="trash" data-drop="trash" aria-label="Discard item"><span class="trash-lid"></span><span class="trash-body"></span></button></aside>
+  <aside class="right-side"><section class="basics-wrap" aria-label="Shelf B"><div id="basics" class="basics"></div></section><button id="book" class="closed-book" aria-label="Open discoveries"><span class="book-border"><small>✦</small><em>Discoveries</em><span class="cover-moon">☾</span><small>❧</small></span></button><div class="book-ledge"></div><button id="trash" class="trash" data-drop="trash" aria-label="Discard item"><span class="trash-lid"><svg viewBox="1350 658 196 72" aria-hidden="true"><defs><clipPath id="original-trash-lid" clipPathUnits="userSpaceOnUse"><ellipse cx="1447" cy="701" rx="95" ry="24"/><path d="M1405 686 1416 665Q1442 655 1465 666L1478 687Z"/></clipPath></defs><image href="assets/basement-illustrated.png" width="1672" height="941" clip-path="url(#original-trash-lid)"/></svg></span><span class="trash-body"></span></button></aside>
   <footer><span id="instruction">Drag two ingredients into the beaker.</span><span id="status"></span></footer>
 </main>
 <div id="tooltip" role="tooltip"></div><div id="drag-ghost"></div>
@@ -18,3 +18,7 @@
 <div id="achievement" hidden><small>✦</small><span>GREAT ALCHEMIST</span></div>
 <div id="rotate"><span>↻</span><p>Turn your phone sideways<br>to enter the basement.</p></div>
 <link rel="stylesheet" href="illustrated.css"><script type="module" src="app.js"></script></body></html>
+
+
+
+

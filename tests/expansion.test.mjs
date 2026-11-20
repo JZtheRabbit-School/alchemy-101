@@ -9,7 +9,7 @@ test('all blood vessels are usable recipe substitutes and record actual ingredie
  for(const [name,{liquid,vessel}] of Object.entries(CONTAINED)){
   assert.equal(combine(liquid,vessel),name);
   if(liquid==='Holy Water')continue;
-  const partner=liquid==='Blood'?'Plant':liquid==='Sacred Blood'?'Love Potion':'Gu Poison';
+  const partner=liquid==='Blood'?'Plant':liquid==='Sacred Blood'?'Love Potion':'Poison';
   const s=fresh();s.slots[0]=name;s.slots[1]=partner;addIngredient(s,name,0);const r=addIngredient(s,partner,1);
   assert.equal(r.item,combine(liquid,partner));assert(s.known.includes(key(name,partner)));assert(!s.known.includes(key(liquid,partner)));
  }
@@ -34,7 +34,7 @@ test('drink containers and delayed effects leave vessels, never flat glass',()=>
  for(const name of ['Potion','Love Potion','Vodka']){const s=fresh();s.mix=[{item:name}];drink(s);finishEffect(s);assert.equal(s.mix[0].item,'Glass Vessel');}
  const s=fresh();s.mix=[{item:'Broth'}];drink(s);assert.equal(s.mix[0].item,'Pot');
 });
-test('every item has artwork, existing asset, and description',()=>{assert.equal(ITEMS.length,80);for(const item of ITEMS){assert(sprites[item],item);assert(existsSync(new URL('../'+sprites[item].path,import.meta.url)),item);assert(descriptions[item]||item.startsWith('Elixir'),item);}});
+test('every item has artwork, existing asset, and description',()=>{assert.equal(ITEMS.length,81);for(const item of ITEMS){assert(sprites[item],item);assert(existsSync(new URL('../'+sprites[item].path,import.meta.url)),item);assert(descriptions[item]||item.startsWith('Elixir'),item);}});
 test('legacy run migrates names and recipe history without losing inventory',()=>{
  const s=fresh();s.version=1;s.slots[0]='Glass';s.slots[2]='Bottle';s.mix=[{item:'Bottle',origin:2}];s.slots[2]=null;s.discovered.push('Glass','Bottle');s.known=[key('Sand','Fire'),key('Glass','Fire'),key('Unicorn','Bread')];s.achievement=true;
  const m=migrate(s);assert.equal(m.version,2);assert.equal(m.slots[0],'Glass Pane');assert.equal(m.mix[0].item,'Glass Vessel');assert(m.discovered.includes('Glass Vessel'));assert(m.known.includes(key('Glass Pane','Fire')));assert(!m.known.includes(key('Unicorn','Bread')));assert.equal(m.achievement,false);

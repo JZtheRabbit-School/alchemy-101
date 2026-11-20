@@ -33,6 +33,7 @@ Metal:'<path fill="#a1a58f" d="m6 41 14-20h29l11 20-9 14H17Z"/><path fill="#c1c2
 };
 function vectorArt(item){
  let p=paths[item];
+ if(item==='Mold')p='<g stroke="#76835b" fill="#a7b78a"><path fill="none" stroke-width="3" d="M9 51 22 38 33 46 45 29 57 41M22 38 18 22M33 46 36 22M45 29 51 15"/><circle cx="18" cy="21" r="7"/><circle cx="36" cy="20" r="9"/><circle cx="52" cy="14" r="6"/><circle cx="12" cy="45" r="7"/><circle cx="53" cy="43" r="8"/></g>';
  if(item==='Magma')p=paths.Stone+'<path fill="#c57a3c" d="m14 23 14 9-5 16 15-3 6 10 5-16-13-10 3-13-9 15Z"/>';
  if(item==='Dust'||item==='Gunpowder'||item==='Flour')p=paths.Sand.replace('#c7af76',item==='Gunpowder'?'#555d45':item==='Flour'?'#ded0a5':'#a49473');
  if(['Algae','Moss','Lichen'].includes(item))p=paths.Plant.replaceAll('#7e8c55',item==='Algae'?'#668d64':'#8c9161');
@@ -47,7 +48,7 @@ function vectorArt(item){
  }
  if(item==='Light Bulb'||item==='Lightened Light Bulb')p=`<path fill="${item==='Light Bulb'?'#bfccaf44':'#e6cb7d'}" d="M22 43C-3 14 28-5 44 10c14 11 7 26-4 33Z"/><path fill="#7e8067" d="M22 44h18v12H22Z"/><path fill="none" d="m26 43-3-16 8 6 8-6-3 16M22 49h18M24 58h14"/>`;
  if(item==='Vase')p='<path fill="#839b8d" d="M23 8h21l-5 18q27 30-6 33C1 58 22 30 27 26Z"/>';
- if(item==='Curse'||item==='Gu Poison')p=paths.Bottle+'<path fill="#4b564066" d="M16 40h33v17H16Z"/><path fill="none" stroke="#b7ab79" d="m25 43 15 10m0-10L25 53"/>';
+ if(item==='Curse'||item==='Poison')p=paths.Bottle+'<path fill="#4b564066" d="M16 40h33v17H16Z"/><path fill="none" stroke="#b7ab79" d="m25 43 15 10m0-10L25 53"/>';
  if(item==='Molotov Cocktail')p=paths.Bottle+'<path fill="#b08a54" d="m27 3 6 21 10-3-6-21Z"/>';
  if(item==='Dough'||item==='Cooked Meat')p=`<path fill="${item==='Dough'?'#d3bd8f':'#9f7052'}" d="M7 45C2 24 23 18 33 23c26-15 32 24 17 31-10 7-36 7-43-9Z"/><path fill="none" d="m21 33 7 6m7-8 10 7"/>`;
  if(item==='Man Eating Plant')p=paths.Plant+'<path fill="#a27658" d="M12 20q17-25 43 0-25 28-43 0Z"/><path fill="none" stroke="#ded0a3" d="m16 20 5 7 5-9 5 9 5-9 5 9 6-8"/>';

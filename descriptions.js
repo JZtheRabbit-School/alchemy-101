@@ -80,3 +80,53 @@ for(const name of [...Object.keys(CONTAINED),'A Glass of Water','A Pot of Water'
  descriptions[name]=`A ${isPot?'pot':'glass'} of ${content}. What were you expecting? You literally just ${content==='Frog'?'put':'poured'} ${content} into a ${isPot?'pot':'glass'}.`;
 }
 delete descriptions.Glass;delete descriptions.Bottle;
+
+// Approved description revisions, November 20, 2026.
+Object.assign(descriptions,{
+  "A Glass of Frog": "A frog born and raised in a bottle. Even its cousin at the bottom of a well has a bigger world.",
+  "A Pot of Frog": "A frog born and raised in a pot. The walls are too smooth to climb. Even its cousin at the bottom of a well has a bigger world.",
+  "Algae": "Photosynthetic organisms that thrive in water. Very slippery. Ewww.",
+  "Blade": "A sharpened metal edge. Be careful. Try not to cut yourself.",
+  "Blender": "A machine with rotating blades. Take your hand out before turning it on.",
+  "Bomb": "An explosive device. Keep it away from fire. The two get along a little too well.",
+  "Bread": "Your first attempt at baking turned out better than expected. Perhaps you should consider a career with fewer explosions.",
+  "Broth": "A liquid made by cooking ingredients in water. Could use a little more seasoning.",
+  "Campfire": "Burning wood that releases heat and light. Best enjoyed somewhere other than indoors.",
+  "Clay": "Fine mineral particles that become pliable when wet. You should try making something with it.",
+  "Cloud": "Tiny water droplets suspended in air. Store carefully. The basement does not need indoor weather.",
+  "Coal": "Carbon-rich fuel. Ancient life, ready to shine one final time.",
+  "Cross": "Two pieces of wood joined at right angles. Made holy through suffering and sacrifice.",
+  "Diamond": "Crystalline carbon with exceptional hardness. It will probably outlive everything in this room.",
+  "Dough": "Flour mixed with liquid. A promising substance with endless possibilities.",
+  "Dust": "Fine particles of matter. Your basement already has plenty. Why are you making more?",
+  "Earth": "Minerals, organic matter, and the ground beneath your feet. Mother Earth has fed generations. Try not to disappoint her.",
+  "Fire": "Rapid oxidation, releasing heat and light. Learning to harness it was humanity’s first and most significant revolution.",
+  "Flies": "Insects with one functional pair of wings. Cover the food. You would prefer to believe this is the only one.",
+  "Flour": "Finely ground seeds or grain. You just sneezed into it. Ewww.",
+  "Flower": "A plant’s reproductive structure. You have never understood why plant genitals make such popular gifts.",
+  "Frog Eggs": "Amphibian embryos protected by jelly. Not all of them will survive.",
+  "Grape": "Fruit of a grapevine, rich in water and sugars. To peel or not to peel? Try saying that five times with your mouth full.",
+  "Holy Water": "Blessed water. At the end of the day, it is still water.",
+  "Jesus": "The Messiah. The Lamb of God, who takes away the sin of the world!",
+  "Knife": "A handled blade for cutting. Just don’t cut yourself.",
+  "Man Eating Plant": "A plant with a concerning appetite and a very concerning diet. Handle with extreme caution.",
+  "Metal": "A material that conducts heat and electricity. Heat it, hammer it, and persuade it to become something useful.",
+  "Molotov Cocktail": "A bottle containing flammable liquid. It looks very throwable. You resist the temptation.",
+  "Moss": "A small, nonvascular plant that favors damp places. It seems quite at home in your basement.",
+  "Mushroom": "The fruiting body of a fungus. Pretty enough to admire. That is not an invitation to eat it.",
+  "Plant": "An organism that turns light into chemical energy. Already more productive than you.",
+  "Pot": "A clay vessel hardened by firing. Civilization began with pottery.",
+  "Pulp": "Crushed grape flesh, skins, seeds, and juice. It looks disgusting. Ewww.",
+  "Raisins Bread": "Bread with raisins in it. You are unsure whether this is an improvement or a setback.",
+  "Shark": "A cartilaginous fish with replaceable teeth. Be careful. Your fingers are much less renewable.",
+  "Six-headed Shark": "A shark with six heads. It looks like it escaped from a horror film with a very small budget.",
+  "Stone": "A solid piece of rock. A convenient pet. No feeding, no walks, no affection.",
+  "Unicorn": "A mythical one-horned horse. Thank goodness you are still a virgin. Apparently, the alternative is being eaten.",
+  "Vodka": "A distilled alcoholic spirit. That’s the spirit! Your scientific judgment has already left the room.",
+  "Wine": "An alcoholic drink made from fermented grapes. Apparently, aging improves it. You do not have that kind of patience.",
+  "Wire": "Metal drawn into a thin strand. An efficient way to carry electricity.",
+  "Wood": "The fibrous structural tissue of trees. You could also call it a tree’s corpse.",
+  "Mold": "A fungus growing in branching threads. Your food has started a new life without your permission.",
+  "Poison": "A substance that disrupts the body’s normal functions. Yours included."
+});
+delete descriptions["Gu Poison"];

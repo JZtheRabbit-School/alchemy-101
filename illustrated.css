@@ -1,6 +1,6 @@
 /* Painted surfaces with transparent, live interaction regions above them. */
 body{display:flex;align-items:center;justify-content:center;min-height:100dvh;background:#141b13}
-.room{width:min(100vw,177.7778dvh);height:min(100dvh,56.25vw);min-height:0;flex:none;background:url('assets/basement-illustrated.png') center/100% 100% no-repeat}
+.room{width:min(100vw,177.7778dvh);height:min(100dvh,56.25vw);min-height:0;flex:none;background:url('assets/basement-illustrated-v2.png') center/100% 100% no-repeat}
 .room:before,.room:after,.wall-crack,.cabinet-crown,.cabinet-feet,.table-top,.table-leg,.cloth,.candle,.book-ledge{display:none}
 header{inset:2.3% 3% auto}.room-label{display:none}#restart{background:#d7c6a0 url('assets/journal-illustrated.png') 20% 40%/700% auto;border:2px solid #55432d;border-radius:3px;box-shadow:2px 3px #201e1777}
 .cabinet{left:8.9%;top:15.5%;width:24%;height:71.8%;background:none;border:0;box-shadow:none}
@@ -10,9 +10,9 @@ header{inset:2.3% 3% auto}.room-label{display:none}#restart{background:#d7c6a0 u
 .right-side{right:4%;width:20%;top:15%;height:72%}.basics-wrap{position:absolute;left:1%;top:4.8%;width:99%;height:15.4%;background:none;border:0;padding:0;box-shadow:none}.basics-wrap:before{display:none}.basics{height:100%;gap:9px}.base-slot{height:100%;background:none;border:0;box-shadow:none}.base-slot .item{width:85%;height:84%;filter:drop-shadow(0 1px 1px #5a482744)}
 .closed-book{top:28.7%;left:17.5%;width:64%;height:40.4%;border:0;box-shadow:none;background:none;transform:none;padding:0;border-radius:4px}.book-border{border:0;padding:12% 5%;color:#d1b074;justify-content:flex-start}.book-border small,.cover-moon{display:none}.book-border em{font-size:clamp(11px,1.5vw,23px);text-shadow:1px 1px #351b13;transform:rotate(-1deg)}.closed-book.unread{animation:painted-book-glow 2s infinite alternate}.trash{top:80%;left:25.5%;width:55.5%;height:33.3%;border-radius:30%}.trash span{display:none}.trash.drop-hover{background:#e3d5a51a;box-shadow:0 0 10px #e3d5a533}
 footer{bottom:1.2%;font-size:clamp(10px,1vw,14px);text-shadow:1px 1px 3px #000;color:#e5d4ae;background:#121a1266;padding:5px 9px;border-radius:2px;left:3%;right:auto;gap:40px}
-.journal-overlay{background:#152016c9 url('assets/basement-illustrated.png') center/cover;backdrop-filter:blur(4px)}.journal-overlay:before{content:'';position:absolute;inset:0;background:#131b12a3;backdrop-filter:blur(2px)}
+.journal-overlay{background:#152016c9 url('assets/basement-illustrated-v2.png') center/cover;backdrop-filter:blur(4px)}.journal-overlay:before{content:'';position:absolute;inset:0;background:#131b12a3;backdrop-filter:blur(2px)}
 .open-book{position:relative;width:min(90vw,113.333dvh);height:auto;aspect-ratio:4/3;max-height:none;background:url('assets/journal-illustrated.png') center/100% 100%;border:0;border-radius:18px;box-shadow:0 14px 55px #0008;isolation:isolate;padding:5.5% 4.3% 6.2%}
-.page{background:none;border:0;border-radius:0;box-shadow:none;padding:2% 4%;scrollbar-color:#9b8050 transparent}.page h2{font-family:'IM Fell English',Georgia,serif;font-size:clamp(26px,3vw,43px);font-weight:400;color:#493d27}.page h2:after{color:#944e3e;font-size:17px;opacity:.85}.page p{font-size:clamp(14px,1.55vw,21px);color:#493f2b}.page .specimen{height:66%}.specimen svg{width:96%;height:96%;filter:drop-shadow(1px 3px 1px #8b714222)}.page h3{border-color:#ad7051;color:#493c28;font-size:clamp(17px,1.8vw,24px)}.recipe{font-size:clamp(14px,1.4vw,19px);margin:16px 0}.recipe button{color:#88472f}.catalog-list button{border-bottom:1px solid #8a6b3b30;color:#4e402b}.catalog-list button:hover{background:#966e3020}.catalog-tab,.book-back{background:#d5c39d url('assets/journal-illustrated.png') 20% 40%/700% auto;color:#704533;border:2px solid #735135;border-radius:4px;font-size:17px}.close{color:#e1d1b1;z-index:3}.title-screen{background:linear-gradient(#132014c9,#142016e8),url('assets/basement-illustrated.png') center/cover}.title-screen:before{border-color:#c5a16e55}.title-screen button{background:#c9b58a url('assets/journal-illustrated.png') 25% 40%/700% auto;color:#493b28}
+.page{background:none;border:0;border-radius:0;box-shadow:none;padding:2% 4%;scrollbar-color:#9b8050 transparent}.page h2{font-family:'IM Fell English',Georgia,serif;font-size:clamp(26px,3vw,43px);font-weight:400;color:#493d27}.page h2:after{color:#944e3e;font-size:17px;opacity:.85}.page p{font-size:clamp(14px,1.55vw,21px);color:#493f2b}.page .specimen{height:66%}.specimen svg{width:96%;height:96%;filter:drop-shadow(1px 3px 1px #8b714222)}.page h3{border-color:#ad7051;color:#493c28;font-size:clamp(17px,1.8vw,24px)}.recipe{font-size:clamp(14px,1.4vw,19px);margin:16px 0}.recipe button{color:#88472f}.catalog-list button{border-bottom:1px solid #8a6b3b30;color:#4e402b}.catalog-list button:hover{background:#966e3020}.catalog-tab,.book-back{background:#d5c39d url('assets/journal-illustrated.png') 20% 40%/700% auto;color:#704533;border:2px solid #735135;border-radius:4px;font-size:17px}.close{color:#e1d1b1;z-index:3}.title-screen{background:linear-gradient(#132014c9,#142016e8),url('assets/basement-illustrated-v2.png') center/cover}.title-screen:before{border-color:#c5a16e55}.title-screen button{background:#c9b58a url('assets/journal-illustrated.png') 25% 40%/700% auto;color:#493b28}
 @keyframes painted-book-glow{to{box-shadow:0 0 26px #e9c07888;background:#c49e3b10}}
 @media(max-height:500px){.slot .moon{width:9px;height:9px;top:2px;left:2px}.shelf{gap:5px}.basics{gap:6px}#restart{padding:4px 10px;font-size:12px}.book-border em{font-size:12px}.open-book{padding:5.5% 4.3% 6.2%}.page{padding:0 4%}.page h2{font-size:24px;margin-bottom:8px}.page h2:after{margin-top:6px;font-size:12px}.page p{font-size:13px;line-height:1.5}.page h3{font-size:16px;margin-top:12px}.recipe{font-size:12px;margin:9px 0}.catalog-list button{font-size:13px;padding:5px 0}.catalog-tab,.book-back{font-size:13px;padding:4px 8px}.catalog-tab{left:3%}.book-back{left:calc(3% + 80px)}.page .specimen{height:64%}footer{padding:3px 6px;font-size:10px}}
 
@@ -32,3 +32,40 @@ header{justify-content:flex-end}.item svg,.specimen svg,#drag-ghost svg,.return-
 /* Inset catalog labels from the worn paper edges on both pages. */
 .catalog-mode .catalog-list{margin-inline:clamp(10px,1.8vw,26px) 4px}
 .catalog-mode .catalog-list button{padding-inline:6px}
+
+/* Keep drop targets interactive without drawing their hit-area shapes. */
+.item.selected:after{display:none}
+.beaker.drop-hover,.trash.drop-hover{background:none;box-shadow:none;outline:none;filter:none}
+.trash::before{content:'';position:absolute;left:0;top:2%;width:100%;height:26%;border-radius:50%;background:radial-gradient(ellipse,#171b15 30%,#343a2c 72%,#8c8c77 76%,#30372a 84%);opacity:0;transition:opacity .15s;pointer-events:none}
+.trash .trash-lid{display:block;position:absolute;left:-3%;top:-9%;width:106%;height:36%;border:0;background:none;border-radius:0;opacity:0;transform-origin:85% 90%;transform:translateY(0) rotate(0deg);transition:transform .22s ease-out,opacity .12s;pointer-events:none}
+.trash .trash-lid::before{display:none}.trash-lid svg{width:100%;height:100%;overflow:visible}
+.trash.drop-hover::before{opacity:1}.trash.drop-hover .trash-lid{opacity:1;transform:translateY(-72%) rotate(-23deg)}
+@media(prefers-reduced-motion:reduce){.trash .trash-lid,.trash::before{transition:none}}
+
+.trash-lid svg{overflow:hidden}
+
+
+
+/* Smaller painted book and raised shelf; align the live book hit area. */
+.closed-book{left:20.5%;width:56%;height:30%}
+.trash::before{top:-3%}
+.trash .trash-lid{top:-14%}
+
+/* Five-percent refinement, centered on the existing opening and book. */
+.trash::before{width:95%;height:24.7%;left:2.5%;top:-2.35%}
+.closed-book{left:19.1%;width:58.8%;height:31.5%}
+.book-art-adjustment{position:absolute;left:76.555%;top:34.006%;width:20.335%;height:35.069%;pointer-events:none}
+.book-art-adjustment svg{display:block;width:100%;height:100%;overflow:hidden}
+
+/* Approved comparison B: another 10% reduction, with the center preserved. */
+.trash::before{width:85.5%;height:22.23%;left:7.25%;top:-1.115%}
+.closed-book{top:31.4778%}
+.book-art-adjustment{height:37.1945%}
+
+/* Center the cover title over the painted front cover, excluding the spine. */
+.closed-book .book-border em{position:relative;left:8%}
+
+
+/* Intoxication warps the room itself; the overlay only blocks interaction. */
+.effect.visions{background:transparent;backdrop-filter:none;animation:none;transform:none;filter:none}
+.room.intoxicated{transition:none;will-change:filter,transform;transform-origin:center}

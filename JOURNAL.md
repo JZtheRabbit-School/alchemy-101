@@ -348,3 +348,80 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - All 22 Node tests passed before commit. This is a source backup to GitHub, not a public website deployment.
 - Remaining discussion: Wine's drinking behavior has not been specified, so Wine is not drinkable. Real touchscreen testing, a full manual 80-item playthrough, and final prose/animation timing review remain future work.
 - Ask at session close what the user still cannot explain about the game or changes. No further design answer is required to save this snapshot.
+
+## 2026-11-19 — purification, Wine intoxication and drag visuals
+
+- Added Cursed Blood + Jesus = Sacred Blood, including contained Cursed Blood substitutions through existing rules.
+- Wine now uses the same visions/intoxication and five-second blackout sequence as Potion/Vodka, returning Glass Vessel afterward for both ordinary players and vampires.
+- Hid item selection ellipses and beaker/trash drop-target backgrounds/shadows; preserved shelf highlighting and forbidden-item cross marks.
+- Added a lifted illustrated-style trash lid and dark opening driven by the existing drag-over class. Leaving, dropping, or canceling clears that class and closes the lid. Reduced-motion preference removes transition.
+- All existing 22 tests plus two new recipe/Wine tests passed. Inspected open-lid visual fixture in browser and refreshed original prototype without altering inventory. Actual finger hover/movement remains untested on hardware.
+- README test command updated. No commit or GitHub push.
+
+## 2026-11-19 — animate the original painted trash lid
+
+- User liked the lid animation but requested the original illustrated lid instead of the newly drawn replacement.
+- Replaced the drawn SVG lid with a clipped view of the original basement image, including its painted handle and metal texture. Reused the existing lift/rotation animation and hit area; no new illustration generated and no gameplay changes.
+- No GitHub commit or push.
+
+## 2026-11-19 — smaller book, raised shelf and lid alignment
+
+- User requested a smaller closed book with its supporting shelf higher, and translating both the animated lid and dark opening upward.
+- Edited the background through the built-in image tool, saved non-destructively as assets/basement-illustrated-v2.png, with exact prompt in assets/basement-v2-prompt.txt. Updated background references and reduced/repositioned the live book hit area to match the returned artwork.
+- Moved both lid and opening upward by five percent of the trash target height. Retained original painted lid source and animation.
+- Inspected the open-lid visual fixture in browser; verified added shelf clearance and new overlay position. Refreshed the original game tab, preserving inventory. No gameplay code changed, no commit or push.
+
+## 2026-11-19 — five-percent visual refinement
+
+- User requested shrinking the dark trash opening by 5% and enlarging the closed book by about 5%, moving its shelf accordingly.
+- Dark ellipse width/height now 95% of previous dimensions, centered at its prior position. Lid dimensions and animation unchanged.
+- Generated a localized book/shelf revision using the built-in image tool; saved assets/basement-illustrated-v3.png and exact prompt assets/basement-v3-prompt.txt. Only the book/shelf region is overlaid, keeping the remainder of the v2 room artwork. Book hit area enlarged 5% in width and height.
+- Inspected updated open-lid visual fixture and refreshed the user's original tab without changing the run. No gameplay changes, commit or push.
+
+## 2026-11-19 — apply approved comparison B
+
+- User selected the additional 10%-smaller dark trash opening and slightly lowered book/shelf preview.
+- Reduced current ellipse width and height by another 10%, preserving its center. Lowered book and shelf by approximately 2% of room height with a localized background patch, retaining the original rest-of-room artwork and original animated lid. Book hit area follows the lower position.
+- Edited artwork through built-in image generation; saved assets/basement-illustrated-v4.png. No gameplay changes, commit or push.
+
+## 2026-11-19 — center the closed-book title
+- Moved Discoveries slightly right to center it on the painted front cover rather than the cover plus spine. Book size and shelf position are unchanged. Local visual adjustment; no commit or push.
+
+
+## 2026-11-19 — normalize expansion illustration sizes
+- Checked all eleven grape and holy-chain additions against original illustrations. Replaced oversized empty framing for Vine, Grape, Pulp, Wine, and Jesus with individual artwork bounds; tightened Raisins as well. Other holy-chain illustrations already filled their frames consistently.
+- Regenerated art-map.js. Shared artwork rendering applies this correction to shelf, beaker, dragged items, and journal. Added tests/art-size-visual.html for repeatable side-by-side visual inspection; verified all eleven additions render without clipped artwork. No gameplay changes, commit, or push.
+
+
+## 2026-11-20 — approved descriptions, Mold, and Poison
+- Applied the approved description drafts, with the final Fire and Poison wording. Grape uses the English tongue-twister draft. Other descriptions unchanged; frog descriptions override the generic container text.
+- Renamed Gu Poison to Poison, retaining Curse + Flies and adding Mold + Curse. Added Bread/Grape + Mushroom = Mold. Broth now requires Cooked Meat + A Pot of Water. Both Elixirs display Elixir(?) while keeping separate internal IDs.
+- Saved poison inventory/history migrates to the new name. Collection now has 81 entries. Mold uses a simple green branching-fungus vector illustration for the prototype; dedicated painted art remains open for review.
+- Updated automated checks and added regression coverage for these recipes, display names, and migration. No commit or push.
+
+
+## 2026-11-20 — explosive mixing ending
+- Fire or Campfire mixed with Gunpowder or Bomb triggers the existing explosion animation, then the standard You died screen and try again? restart. Applies in both ingredient orders and to freshly created results in the beaker.
+- Fatal combinations produce no collectible item or recipe. Input is blocked during the effect; refresh recovery finishes the explosion. Death clears inventory and discoveries. Crafting Gunpowder itself remains safe.
+- Added regression coverage for all pairs, orders, chaining, effect recovery, and reset. No commit or push.
+
+
+## 2026-11-20 — escalating room distortion
+- Replaced Potion/Vodka/Wine floating-symbol hallucinations with distortion of the actual room, following the supplied warped-world reference. Ten seconds of gradually accelerating ripples and sway, increasing blur, and progressive darkening lead into the existing five-second blackout.
+- Love Potion retains its hearts/Cupid/story sequence. Reduced-motion preference keeps the timed blur/darkening without spatial warping. Distortion filters clean up on completion or cancellation.
+- Syntax check and all 29 logic checks pass. Browser inspection confirmed early and later distorted frames. No commit or push.
+
+
+## 2026-11-20 — keep empty vessel visible during intoxication
+- Potion, Vodka, and Wine now leave their empty Glass Vessel in the beaker immediately upon drinking, so it distorts with the room instead of disappearing until wake-up. Love Potion also leaves its container immediately.
+- Restoring an older saved vision effect with an empty beaker inserts its empty vessel before animation. Added regression coverage for immediate visibility, save recovery, and a single vessel after waking. No commit or push.
+
+
+## 2026-11-20 — Love Potion letter-by-letter narration
+- Changed both Love Potion story variants from words at 250 ms intervals to individual characters at 45 ms intervals. Full text remains unskippable; the final pause and outcomes are unchanged. No commit or push.
+
+
+## 2026-11-20 — session close and GitHub backup
+- User requested committing and pushing all current prototype changes, including the previously local November 19 refinements. Final verification: all 30 automated checks pass and app.js syntax check passes. Letter-by-letter narration has syntax verification; its final pacing still needs player review.
+- Includes revised room/book/trash artwork and interaction regions, normalized expansion artwork sizes, Wine intoxication and purification recipe, approved descriptions/Mold/Poison updates, explosive ending, ten-second room distortion with visible empty vessel, and letter-by-letter Love Potion narration.
+

@@ -1,0 +1,3 @@
+<!doctype html><title>Trash lid visual check</title><base href="/"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="illustrated.css"><script type="module">
+const html=await (await fetch('/index.html')).text();const doc=new DOMParser().parseFromString(html,'text/html');document.body.append(doc.querySelector('#room'));document.querySelector('#trash').classList.add('drop-hover');
+</script>

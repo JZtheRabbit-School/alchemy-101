@@ -561,17 +561,6 @@ export const sprites={
       144.21
     ]
   },
-  "Gu Poison": {
-    "path": "assets/revisions-2026-11-16/items-revised.png",
-    "width": 948,
-    "height": 1659,
-    "box": [
-      716.925,
-      1170.7800000000002,
-      225.14999999999998,
-      227.51999999999998
-    ]
-  },
   "Seeds": {
     "path": "assets/items-illustrated.png",
     "width": 1254,
@@ -764,10 +753,10 @@ export const sprites={
     "width": 2172,
     "height": 724,
     "box": [
-      8,
-      50,
-      418.4,
-      624
+      60,
+      125,
+      374,
+      485
     ]
   },
   "Grape": {
@@ -775,10 +764,10 @@ export const sprites={
     "width": 2172,
     "height": 724,
     "box": [
-      442.4,
-      50,
-      418.4,
-      624
+      490,
+      140,
+      350,
+      465
     ]
   },
   "Pulp": {
@@ -786,10 +775,10 @@ export const sprites={
     "width": 2172,
     "height": 724,
     "box": [
-      876.8,
-      50,
-      418.4,
-      624
+      870,
+      285,
+      430,
+      290
     ]
   },
   "Wine": {
@@ -797,10 +786,10 @@ export const sprites={
     "width": 2172,
     "height": 724,
     "box": [
-      1311.1999999999998,
-      50,
-      418.4,
-      624
+      1360,
+      125,
+      310,
+      490
     ]
   },
   "Jesus": {
@@ -808,10 +797,10 @@ export const sprites={
     "width": 2172,
     "height": 724,
     "box": [
-      1745.6,
-      50,
-      418.4,
-      624
+      1815,
+      90,
+      285,
+      535
     ]
   },
   "Cross": {
@@ -863,10 +852,10 @@ export const sprites={
     "width": 1536,
     "height": 1024,
     "box": [
-      519.68,
-      519.68,
-      478,
-      496.64
+      535,
+      620,
+      440,
+      330
     ]
   },
   "Raisins Bread": {
@@ -878,6 +867,28 @@ export const sprites={
       519.68,
       496.64,
       496.64
+    ]
+  },
+  "Mold": {
+    "path": "assets/mold.svg",
+    "width": 66,
+    "height": 66,
+    "box": [
+      3,
+      3,
+      60,
+      60
+    ]
+  },
+  "Poison": {
+    "path": "assets/revisions-2026-11-16/items-revised.png",
+    "width": 948,
+    "height": 1659,
+    "box": [
+      716.925,
+      1170.7800000000002,
+      225.14999999999998,
+      227.51999999999998
     ]
   }
 };
