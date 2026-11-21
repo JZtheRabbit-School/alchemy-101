@@ -1,3 +1,4 @@
+import {mountLoveEffect,LOVE_EFFECT_DURATION} from './love-effect.js';
 import {displayName,BASES,ITEMS,RECIPES,ELIXIRS,fresh,migrate,canTouch,reserved,addIngredient,storeMix,moveSlot,discard,DRINKS,drink,finishEffect} from './game.js';
 import {art,moon} from './art.js';
 import {descriptions} from './descriptions.js';
@@ -97,9 +98,8 @@ async function runEffect(){
  if(e.type==='explosion'){$('effect').className='effect explosion';await delay(1100);}
  else{
   $('effect').className='effect '+(e.type==='love'?'love':'visions');
-  if(e.type==='love')for(let i=0;i<14;i++){const n=document.createElement('span');n.textContent=e.type==='love'?(i===0?'➹':'♥'):['◉','☾','✧','◇'][i%4];n.className=i===0&&e.type==='love'?'cupid':'';n.style.left=(7+i*19%85)+'%';n.style.top=(8+i*17%80)+'%';n.style.animationDelay=(-i/3)+'s';$('hallucinations').append(n);}
-  if(e.type==='love')$('hallucinations').insertAdjacentHTML('beforeend','<span class="cupid" style="left:43%;top:30%"><svg width="140" height="140" viewBox="0 0 100 100"><g fill="#e8c3ce" stroke="#994d68" stroke-width="2"><path d="M45 46Q5 3 10 40q1 24 34 19m13-13Q90 0 93 36 94 56 59 60"/><circle cx="51" cy="29" r="12"/><path d="M43 42q-10 24 4 30l-14 15 6 5 17-18 8 16 7-4-12-22V45Z"/><path fill="none" d="m61 50 25 6m-6-20q20 21 0 41m0-40 0 40M59 56h35l-7-5m7 5-7 5"/></g></svg></span>');
-  if(e.type==='love')await delay(3500);else await distortRoom(alive);if(!alive())return;$('effect').className='effect blackout';$('hallucinations').replaceChildren();
+  if(e.type==='love'){await mountLoveEffect($('hallucinations'));if(!alive())return;}
+  if(e.type==='love')await delay(LOVE_EFFECT_DURATION);else await distortRoom(alive);if(!alive())return;$('effect').className='effect blackout';$('hallucinations').replaceChildren();
   if(e.type==='love'){
    await delay(900);if(!alive())return;$('effect').className='effect story';
    const narrative=e.fatal?'You leave your basement with a declaration of eternal love prepared. The front door opens. Sunlight falls across your hands. You never reach their house.':'You leave your basement and hurry to your crush’s home. At their door, you confess your eternal love. They find this REALLY WEIRD and turn you down. You refuse to leave. They call the police. You spend five days at the police station, explaining that this is all a misunderstanding. Eventually, the potion wears off. You are back in your basement. Your research has made no meaningful contribution to romance.';

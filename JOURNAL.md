@@ -425,3 +425,32 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - User requested committing and pushing all current prototype changes, including the previously local November 19 refinements. Final verification: all 30 automated checks pass and app.js syntax check passes. Letter-by-letter narration has syntax verification; its final pacing still needs player review.
 - Includes revised room/book/trash artwork and interaction regions, normalized expansion artwork sizes, Wine intoxication and purification recipe, approved descriptions/Mold/Poison updates, explosive ending, ten-second room distortion with visible empty vessel, and letter-by-letter Love Potion narration.
 
+
+## 2026-11-21 — Love Potion visual preview
+- Added a separate visual-only preview page showing the existing pink tint, floating hearts, and Cupid continuously for inspection. Verified in the built-in browser. Gameplay and saved run are untouched. Preview file remains local; no commit or push.
+
+
+## 2026-11-21 — illustrated Love Potion preview
+- User approved trying the standalone generated pink Cupid/hearts/arrow concept in the separate effect preview. Saved the concept artwork locally and replaced the aligned symbol animation with gently drifting artwork, a soft offset echo, haze, and a vignette over the basement.
+- Preview loops continuously for visual review; reduced-motion disables drift. Main gameplay effect remains unchanged pending feedback. Local changes only; no commit or push.
+
+
+## 2026-11-21 — illustrated Love Potion preview
+- User requested trying the approved concept in the separate preview, with consistent Cupid/heart/arrow art and transparent space revealing the basement.
+- Generated a true transparent watercolor/engraving overlay with organically scattered hearts and arrow-pierced hearts, two Cupids, soft pink tint and gentle drift. Only the preview was updated; main gameplay effect remains unchanged. Local files only; no commit or push.
+
+
+## 2026-11-21 — lighter staged Love Potion preview
+- Lightened the illustrated artwork to pastel pink. Pink tint builds over six seconds; individual graphics begin emerging after two seconds with staggered fades and independent drifting paths, varied speeds and directions. Added Replay to inspect the entrance again.
+- Changes remain confined to the separate preview; main game and saved run untouched. No commit or push.
+
+
+## 2026-11-21 — repair preview heart crops and add small hearts
+- Refined independent clip boundaries to exclude neighboring heart fragments from the lower-left arrow-heart and Cupid regions. Added sixteen small watercolor hearts at scattered positions with varied sizes, fade timing and independent drift. Preview only; no commit or push.
+
+
+## 2026-11-21 — integrate and publish approved Love Potion visuals
+- Integrated approved pastel Cupid, heart and arrow graphics, gradual pink tint, staggered emergence and independent drift into actual Love Potion drinking. Shared love-effect.js and love-effect.css keep review preview and gameplay identical.
+- Visual stage lasts 12 seconds so the six-second tint and staggered fades have time to appear, followed by existing blackout, unskippable letter-by-letter story and original outcomes. Empty vessel remains visible beneath transparent artwork.
+- Verified actual drinking in a separate browser fixture, observed illustrated stage and transition to narration, refreshed user's prototype without altering its inventory. All 30 automated checks and both JavaScript syntax checks pass. User authorized GitHub push.
+

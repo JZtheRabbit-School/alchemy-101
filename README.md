@@ -68,3 +68,6 @@ Item descriptions have been revised. Soup preparation uses a filled pottery pot;
 
 Intoxication now makes the room waver, blur, and darken over roughly ten seconds before the blackout. Reduced-motion settings soften the movement.
 
+
+Love Potion now builds a transparent pink haze with illustrated Cupids, arrow-pierced hearts, and independently drifting small hearts before its story begins.
+
