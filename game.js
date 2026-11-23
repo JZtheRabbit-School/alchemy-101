@@ -7,7 +7,7 @@ const rows=[
 // Rename materials without creating extra discoveries.
 for(const row of rows)for(let i=0;i<3;i++)row[i]=row[i].split('/').map(x=>x==='Glass'?'Glass Pane':x==='Bottle'?'Glass Vessel':x).join('/');
 rows.splice(rows.findIndex(r=>r[0]==='Unicorn'&&r[1]==='Bread/Broth'),1);
-rows.push(['Bread','Mushroom','Mold'],['Grape','Mushroom','Mold'],['Mold','Curse','Poison'],['Cursed Blood','Jesus','Sacred Blood'],['A Pot of Frog/A Glass of Frog','Stone','Frog'],['Plant','Sand','Vine'],['Vine','Water','Grape'],['Grape','Blender','Pulp'],['Pulp','A Glass of Water','Wine'],['Bread','Wine','Jesus'],['Jesus','Unicorn','Sacred Blood'],['Jesus','Wood','Cross'],['Jesus','Water','Holy Water'],['Jesus','A Glass of Water','A Glass of Holy Water'],['Jesus','A Pot of Water','A Pot of Holy Water'],['Vine','Flies','Flower'],['Grape','Earth','Vine'],['Frog','Flies','Frog'],['Grape','Fire','Raisins'],['Bread','Raisins','Raisins Bread']);
+rows.push(['Jesus','Wine','A Glass of Sacred Blood'],['Blood','Curse','Cursed Blood'],['Bread','Mushroom','Mold'],['Grape','Mushroom','Mold'],['Mold','Curse','Poison'],['Cursed Blood','Jesus','Blood'],['Blood','Jesus','Sacred Blood'],['A Pot of Frog/A Glass of Frog','Stone','Frog'],['Plant','Sand','Vine'],['Vine','Water','Grape'],['Grape','Blender','Pulp'],['Pulp','A Glass of Water','Wine'],['Bread','Wine','Jesus'],['Jesus','Unicorn','Sacred Blood'],['Jesus','Wood','Cross'],['Jesus','Water','Holy Water'],['Jesus','A Glass of Water','A Glass of Holy Water'],['Jesus','A Pot of Water','A Pot of Holy Water'],['Vine','Flies','Flower'],['Grape','Earth','Vine'],['Frog','Flies','Frog'],['Grape','Fire','Raisins'],['Bread','Raisins','Raisins Bread']);
 export const CONTAINED={};
 for(const liquid of ['Blood','Cursed Blood','Sacred Blood','Holy Water'])for(const [prefix,vessel] of [['A Glass of ','Glass Vessel'],['A Pot of ','Pot']]){
  const name=prefix+liquid;CONTAINED[name]={liquid,vessel};rows.push([liquid,vessel,name]);
@@ -18,8 +18,11 @@ for(const [aa,bb,out] of rows)for(const a of aa.split('/'))for(const b of bb.spl
 // A container of blood can substitute for its loose drop. Record the actual tried pair.
 for(const recipe of [...RECIPES])for(const [name,{liquid}] of Object.entries(CONTAINED)){
  if(liquid==='Holy Water')continue;
- if(recipe.a===liquid&&!['Glass Vessel','Pot'].includes(recipe.b))RECIPES.push({a:name,b:recipe.b,out:recipe.out,id:key(name,recipe.b)});
- if(recipe.b===liquid&&!['Glass Vessel','Pot'].includes(recipe.a))RECIPES.push({a:recipe.a,b:name,out:recipe.out,id:key(recipe.a,name)});
+ const partner=recipe.a===liquid?recipe.b:recipe.a;
+ const preservesVessel=(liquid==='Blood'&&partner==='Curse')||(['Blood','Cursed Blood'].includes(liquid)&&partner==='Jesus');
+ const output=preservesVessel?name.slice(0,-liquid.length)+recipe.out:recipe.out;
+ if(recipe.a===liquid&&!['Glass Vessel','Pot'].includes(recipe.b))RECIPES.push({a:name,b:recipe.b,out:output,id:key(name,recipe.b)});
+ if(recipe.b===liquid&&!['Glass Vessel','Pot'].includes(recipe.a))RECIPES.push({a:recipe.a,b:name,out:output,id:key(recipe.a,name)});
 }
 export const ITEMS=[...new Set([...BASES,...RECIPES.flatMap(r=>[r.a,r.b,r.out])])];
 const lookup=new Map(RECIPES.map(r=>[r.id,r.out]));

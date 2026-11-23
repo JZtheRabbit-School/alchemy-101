@@ -84,10 +84,13 @@
       1,
     );
     rows.push(
+      ["Jesus", "Wine", "A Glass of Sacred Blood"],
+      ["Blood", "Curse", "Cursed Blood"],
       ["Bread", "Mushroom", "Mold"],
       ["Grape", "Mushroom", "Mold"],
       ["Mold", "Curse", "Poison"],
-      ["Cursed Blood", "Jesus", "Sacred Blood"],
+      ["Cursed Blood", "Jesus", "Blood"],
+      ["Blood", "Jesus", "Sacred Blood"],
       ["A Pot of Frog/A Glass of Frog", "Stone", "Frog"],
       ["Plant", "Sand", "Vine"],
       ["Vine", "Water", "Grape"],
@@ -124,20 +127,17 @@
     for (const recipe of [...RECIPES])
       for (const [name, { liquid }] of Object.entries(CONTAINED)) {
         if (liquid === "Holy Water") continue;
+        const partner = recipe.a === liquid ? recipe.b : recipe.a;
+        const preservesVessel =
+          (liquid === "Blood" && partner === "Curse") ||
+          (["Blood", "Cursed Blood"].includes(liquid) && partner === "Jesus");
+        const output = preservesVessel
+          ? name.slice(0, -liquid.length) + recipe.out
+          : recipe.out;
         if (recipe.a === liquid && !["Glass Vessel", "Pot"].includes(recipe.b))
-          RECIPES.push({
-            a: name,
-            b: recipe.b,
-            out: recipe.out,
-            id: key(name, recipe.b),
-          });
+          RECIPES.push({ a: name, b: recipe.b, out: output, id: key(name, recipe.b) });
         if (recipe.b === liquid && !["Glass Vessel", "Pot"].includes(recipe.a))
-          RECIPES.push({
-            a: recipe.a,
-            b: name,
-            out: recipe.out,
-            id: key(recipe.a, name),
-          });
+          RECIPES.push({ a: recipe.a, b: name, out: output, id: key(recipe.a, name) });
       }
     const ITEMS = [...new Set([...BASES, ...RECIPES.flatMap((r) => [r.a, r.b, r.out])])];
     const lookup = new Map(RECIPES.map((r) => [r.id, r.out]));

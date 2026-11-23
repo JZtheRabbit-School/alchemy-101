@@ -479,3 +479,22 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - User authorized pushing current work. CodePen drinking-rule changes require replacing JavaScript.js only; CSS.css also contains the earlier proportional cover-title fix. HTML.html and index.html were regenerated/formatted without a gameplay markup change.
 - Final verification: all 32 automated checks pass; formatted CodePen JavaScript syntax passes. Includes packaging script, formatted files, ZIP, documentation, book-title fix, and Poison/Curse drinking rules.
 
+
+## 2026-11-23 — curse ordinary blood
+- Added Blood + Curse = Cursed Blood. Contained ordinary blood retains its vessel: A Glass/Pot of Blood + Curse = A Glass/Pot of Cursed Blood. Both orders work, consume ingredients, and record actual recipe.
+- Sacred Blood recipes remain Jesus + Unicorn and Jesus + Cursed Blood, with existing contained Cursed Blood substitutions producing loose Sacred Blood. No additional Sacred Blood recipe requested.
+- All 33 checks pass; formatted CodePen JavaScript and ZIP refreshed. Only JavaScript panel changes required. No commit or push.
+
+
+## 2026-11-23 — two-stage blood purification
+- Replaced Jesus + Cursed Blood = Sacred Blood with Jesus + Cursed Blood = Blood. Added Jesus + Blood = Sacred Blood. Glass and pot variants retain their containers at both stages. Jesus + Unicorn remains Sacred Blood.
+- Verified all six transformations in both orders, inventory consumption and actual recipe recording. All 34 checks pass; formatted CodePen JavaScript syntax passes and ZIP refreshed. No commit or push.
+
+
+## 2026-11-23 — sanctify Wine
+- Added Jesus + Wine = A Glass of Sacred Blood. Verified both ingredient orders, consumption, output and recipe recording. All 35 checks pass; formatted CodePen JavaScript and ZIP updated. No commit or push.
+
+
+## 2026-11-23 — publish blood recipe updates
+- User authorized GitHub push. Only the JavaScript panel needs replacing in CodePen; HTML and CSS remain unchanged. Includes blood cursing with preserved containers, two-stage Jesus purification, and Jesus + Wine producing A Glass of Sacred Blood. All 35 checks and bundled JavaScript syntax pass.
+
