@@ -56,14 +56,14 @@ export function addIngredient(s,item,origin=null){
 export function moveSlot(s,from,to){if(s.effect||s.dead||!s.slots[from]||!canTouch(s,s.slots[from])||s.slots[to]||reserved(s,to))return false;s.slots[to]=s.slots[from];s.slots[from]=null;return true;}
 export function storeMix(s,to){if(s.dead||s.effect||s.mix.length!==1||s.slots[to]||reserved(s,to)&&s.mix[0].origin!==to||!canTouch(s,s.mix[0].item))return false;s.slots[to]=s.mix[0].item;s.mix=[];s.result=false;return true;}
 export function discard(s,source){if(s.dead||s.effect)return false;if(source==='mix'){if(s.mix.length!==1||!canTouch(s,s.mix[0].item))return false;s.mix=[];s.result=false;return true;}if(!s.slots[source]||!canTouch(s,s.slots[source]))return false;s.slots[source]=null;return true;}
-export const DRINKS=new Set(['Water','Magma','A Glass of Water','A Pot of Water','Potion','Love Potion','Blood','Cursed Blood','Sacred Blood','Holy Water','Broth','Vodka','Wine',...ELIXIRS,...Object.keys(CONTAINED)]);
-const VESSELS={'A Glass of Water':'Glass Vessel','A Pot of Water':'Pot',Potion:'Glass Vessel','Love Potion':'Glass Vessel',Vodka:'Glass Vessel',Wine:'Glass Vessel',Broth:'Pot'};
+export const DRINKS=new Set(['Water','Magma','A Glass of Water','A Pot of Water','Potion','Love Potion','Blood','Cursed Blood','Sacred Blood','Holy Water','Broth','Vodka','Wine','Poison','Curse',...ELIXIRS,...Object.keys(CONTAINED)]);
+const VESSELS={'A Glass of Water':'Glass Vessel','A Pot of Water':'Pot',Potion:'Glass Vessel','Love Potion':'Glass Vessel',Vodka:'Glass Vessel',Wine:'Glass Vessel',Broth:'Pot',Poison:'Glass Vessel',Curse:'Glass Vessel'};
 export function kill(s){const started=s.started;Object.assign(s,fresh(),{dead:true,started});}
 export function drink(s){
  if(s.dead||s.effect||s.mix.length!==1||!DRINKS.has(s.mix[0].item))return null;
  const item=s.mix[0].item,liquid=CONTAINED[item]?.liquid||item,empty=CONTAINED[item]?.vessel||VESSELS[item];s.mix=[];s.result=false;
- if(['Magma','Cursed Blood',...ELIXIRS].includes(liquid)||['Sacred Blood','Holy Water'].includes(liquid)&&s.vampire){if(liquid==='Cursed Blood'){s.effect={type:'explosion'};return 'explosion';}kill(s);return 'death';}
- if(['Potion','Vodka','Wine','Love Potion'].includes(liquid)){s.mix=[{item:empty,origin:null}];s.result=true;discover(s,empty);s.effect={type:liquid==='Love Potion'?'love':'visions',fatal:liquid==='Love Potion'&&s.vampire,vessel:empty};return s.effect.type;}
+ if(liquid==='Curse'||liquid==='Poison'&&!s.vampire||['Magma','Cursed Blood',...ELIXIRS].includes(liquid)||['Sacred Blood','Holy Water'].includes(liquid)&&s.vampire){if(liquid==='Cursed Blood'){s.effect={type:'explosion'};return 'explosion';}kill(s);return 'death';}
+ if(['Potion','Vodka','Wine','Love Potion','Poison'].includes(liquid)){s.mix=[{item:empty,origin:null}];s.result=true;discover(s,empty);s.effect={type:liquid==='Love Potion'?'love':'visions',fatal:liquid==='Love Potion'&&s.vampire,vessel:empty};return s.effect.type;}
  if(empty){s.mix=[{item:empty,origin:null}];s.result=true;discover(s,empty);}
  if(liquid==='Blood'){s.vampire=true;return 'vampire';}
  return 'consumed';

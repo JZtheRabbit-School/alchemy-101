@@ -454,3 +454,28 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 - Visual stage lasts 12 seconds so the six-second tint and staggered fades have time to appear, followed by existing blackout, unskippable letter-by-letter story and original outcomes. Empty vessel remains visible beneath transparent artwork.
 - Verified actual drinking in a separate browser fixture, observed illustrated stage and transition to narration, refreshed user's prototype without altering its inventory. All 30 automated checks and both JavaScript syntax checks pass. User authorized GitHub push.
 
+
+## 2026-11-22 — CodePen-ready package
+- User requested copy/import-ready files. Added build-codepen.mjs to flatten all game modules and styles into codepen/HTML.html, CSS.css, and JavaScript.js, plus a full index.html and instructions. Artwork URLs use jsDelivr pinned to the existing public GitHub commit; original game source remains unchanged.
+- Added alchemy-101-codepen.zip for easy transfer. Checked generated JavaScript syntax, loaded packaged page in built-in browser, verified external artwork and Water + Earth = Clay. No signed-in CodePen import or Pen creation performed. Files remain local, not committed or pushed.
+
+
+## 2026-11-22 — format CodePen files for reading
+- Formatted both CodePen HTML files, combined CSS, and combined JavaScript using Prettier 3.6.2 with two-space indentation and consistent line breaks. No gameplay changes. Verified formatter stability and JavaScript syntax; refreshed ZIP with formatted copies. No commit or push.
+
+
+## 2026-11-22 — proportional cover title in embedded previews
+- User reported oversized Discoveries label in CodePen. Earlier text used viewport units and height breakpoints independent of the painted book dimensions. Made the closed book an inline-size container and sized its title at 12cqw, with a room-proportional fallback. Applied to original stylesheet and formatted CodePen CSS; no gameplay change.
+- Local fix only; no commit or push.
+
+
+## 2026-11-23 — drinkable Poison and Curse
+- Added Poison and Curse to drinkable items. Curse immediately kills both ordinary players and vampires. Poison immediately kills ordinary players; vampires experience the same 10-second distortion and five-second blackout as Potion, survive and remain vampires.
+- Poison uses its existing glass bottle, leaving an empty Glass Vessel immediately and after recovery. Added checks for immediate death/reset and vampire survival, hallucinations, input blocking, and container return. All 32 checks pass.
+- Regenerated and formatted CodePen copies and updated ZIP. No commit or push.
+
+
+## 2026-11-23 — GitHub backup of CodePen package and drinking updates
+- User authorized pushing current work. CodePen drinking-rule changes require replacing JavaScript.js only; CSS.css also contains the earlier proportional cover-title fix. HTML.html and index.html were regenerated/formatted without a gameplay markup change.
+- Final verification: all 32 automated checks pass; formatted CodePen JavaScript syntax passes. Includes packaging script, formatted files, ZIP, documentation, book-title fix, and Poison/Curse drinking rules.
+

@@ -71,3 +71,10 @@ Intoxication now makes the room waver, blur, and darken over roughly ten seconds
 
 Love Potion now builds a transparent pink haze with illustrated Cupids, arrow-pierced hearts, and independently drifting small hearts before its story begins.
 
+
+## CodePen copy
+A copy-ready package is available in codepen/ with HTML, CSS, JavaScript, and setup instructions. Regenerate it with node build-codepen.mjs after changing the prototype.
+
+
+Poison and Curse can now be drunk when placed alone in the beaker. Drinking effects depend on the player's condition.
+

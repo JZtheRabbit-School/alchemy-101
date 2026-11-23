@@ -69,3 +69,12 @@ header{justify-content:flex-end}.item svg,.specimen svg,#drag-ghost svg,.return-
 /* Intoxication warps the room itself; the overlay only blocks interaction. */
 .effect.visions{background:transparent;backdrop-filter:none;animation:none;transform:none;filter:none}
 .room.intoxicated{transition:none;will-change:filter,transform;transform-origin:center}
+/* Keep the cover title proportional to its book, including short embedded previews. */
+.closed-book {
+  container-type: inline-size;
+}
+.closed-book .book-border em {
+  font-size: min(1.4vw, 2.49dvh);
+  font-size: 12cqw;
+  white-space: nowrap;
+}
