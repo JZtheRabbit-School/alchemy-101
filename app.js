@@ -1,5 +1,5 @@
 import {mountLoveEffect,LOVE_EFFECT_DURATION} from './love-effect.js';
-import {displayName,BASES,ITEMS,RECIPES,ELIXIRS,fresh,migrate,canTouch,reserved,addIngredient,storeMix,moveSlot,discard,DRINKS,drink,finishEffect} from './game.js';
+import {MULTI_RECIPES,displayName,BASES,ITEMS,RECIPES,ELIXIRS,fresh,migrate,canTouch,reserved,addIngredient,storeMix,moveSlot,discard,DRINKS,drink,finishEffect} from './game.js';
 import {art,moon} from './art.js';
 import {descriptions} from './descriptions.js';
 import {catalogSpread,neighbors} from './journal.js';
@@ -35,7 +35,7 @@ document.addEventListener('pointerup',async e=>{
  if(target.dataset.drop==='beaker'&&d.source!=='mix'){
   const outcome=addIngredient(state,d.item,d.source==='base'?null:Number(d.source));
   if(outcome.type==='failed'){busy=true;save();document.body.classList.add('busy');animateReturn(outcome.returning);setTimeout(()=>{busy=false;document.body.classList.remove('busy');render();},650);return;}
-  render();if(outcome.type==='explosion'){runEffect();return;}if(outcome.type==='created'){const node=$('contents').firstElementChild;node?.classList.add('new-item');if(outcome.isNew){$('book').classList.add('unread');$('discovery').textContent=displayName(outcome.item);$('discovery').classList.remove('flash');void $('discovery').offsetWidth;$('discovery').classList.add('flash');clearTimeout(discoveryTimer);discoveryTimer=setTimeout(()=>$('discovery').textContent='',3000);}}
+  render();if(outcome.type==='returned-to-bases'){await animateBaseReturn(outcome.items);return;}if(outcome.type==='explosion'){runEffect();return;}if(outcome.type==='created'){const node=$('contents').firstElementChild;node?.classList.add('new-item');if(outcome.isNew){$('book').classList.add('unread');$('discovery').textContent=displayName(outcome.item);$('discovery').classList.remove('flash');void $('discovery').offsetWidth;$('discovery').classList.add('flash');clearTimeout(discoveryTimer);discoveryTimer=setTimeout(()=>$('discovery').textContent='',3000);}}
  }else if(target.dataset.drop==='slot'){
   if(d.source==='mix')storeMix(state,Number(target.dataset.index));else if(d.source!=='base')moveSlot(state,Number(d.source),Number(target.dataset.index));render();
  }else if(target.dataset.drop==='trash'&&d.source!=='base'){discard(state,d.source==='mix'?'mix':Number(d.source));render();}
@@ -44,6 +44,15 @@ document.addEventListener('pointercancel',()=>{if(drag){drag.node.classList.remo
 function animateReturn(materials){
  const from=$('beaker').getBoundingClientRect();for(const m of materials){const dest=(m.origin===null?document.querySelector(`[data-base="${m.item}"]`):$('shelf').children[m.origin]).getBoundingClientRect();const n=document.createElement('div');n.className='return-ghost';n.innerHTML=art(m.item);n.style.left=(from.left+from.width/2-32)+'px';n.style.top=(from.top+from.height*.65)+'px';document.body.append(n);requestAnimationFrame(()=>requestAnimationFrame(()=>{n.style.transform=`translate(${dest.left+dest.width/2-from.left-from.width/2}px,${dest.top+dest.height/2-from.top-from.height*.65-32}px)`;n.style.opacity='.3';}));setTimeout(()=>n.remove(),650);}
  $('contents').replaceChildren(...state.mix.map(m=>itemNode(m.item,'mix')));
+}
+async function animateBaseReturn(items){
+ const token=effectToken;busy=true;document.body.classList.add('busy');const box=$('contents').getBoundingClientRect(),nodes=[];
+ try{await Promise.all(items.map(async(item,i)=>{
+ const n=document.createElement('div');n.className='return-ghost';n.style.transition='none';n.style.width='74px';n.style.height='74px';n.innerHTML=art(item);const angle=i*Math.PI/2-Math.PI/2,x=box.left+box.width/2-37+Math.cos(angle)*58,y=box.top+box.height*.65-37+Math.sin(angle)*58;n.style.left=x+'px';n.style.top=y+'px';document.body.append(n);nodes.push(n);
+ await delay(850);if(token!==effectToken)return;const target=document.querySelector('[data-base="'+item+'"]'),b=target.getBoundingClientRect();
+ await n.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+((b.left+b.width/2-37-x)*.35)+'px,'+(b.top-75-y)+'px) scale(.8)',opacity:1,offset:.5},{transform:'translate('+(b.left+b.width/2-37-x)+'px,'+(b.top+b.height/2-37-y)+'px) scale(.55)',opacity:0}],{duration:1400,delay:i*150,easing:'ease-in-out',fill:'forwards'}).finished;
+ if(token===effectToken)target.animate([{filter:'brightness(2.2) drop-shadow(0 0 18px #f4dfa1)'},{filter:'none'}],{duration:800});n.remove();
+ }));}finally{nodes.forEach(n=>n.remove());if(token===effectToken){busy=false;document.body.classList.remove('busy');render();}}
 }
 function reset(){effectToken++;busy=false;document.body.classList.remove('busy');state=fresh();state.started=true;save();$('effect').hidden=true;$('journal').hidden=true;$('title-screen').hidden=true;$('intro').hidden=true;$('achievement').hidden=true;$('book').classList.remove('unread');$('discovery').textContent='';hideTooltip();render();}
  $('restart').onclick=()=>{if(confirm('Restart this experiment? Your discoveries and stored items will be lost.'))reset();};$('again').onclick=reset;
@@ -68,9 +77,9 @@ function entry(item){
  $('left-page').innerHTML=`<h2>${displayName(item)}</h2><div class="specimen">${art(item)}</div>`;
  const desc=descriptions[item]||'A preparation of uncertain composition. The confidence of its maker is not a scientific instrument.';
  $('right-page').innerHTML=`<h2>${displayName(item)}</h2><p>${desc}</p><h3>Known recipes</h3><div id="recipes"></div>`;
- const tried=RECIPES.filter(r=>r.out===item&&state.known.includes(r.id));if(state.known.includes([item,item].join('|')))tried.push({a:item,b:item,out:item});
+ const tried=[...RECIPES.filter(r=>r.out===item&&state.known.includes(r.id)),...MULTI_RECIPES.filter(r=>r.outputs.includes(item)&&state.known.includes(r.id))];if(state.known.includes([item,item].join('|')))tried.push({a:item,b:item,out:item});
  if(!tried.length){const p=document.createElement('p');p.className='catalog-intro';p.textContent=BASES.includes(item)?'Present at the beginning.':'No mixing recipe recorded.';$('recipes').append(p);}
- for(const r of tried){const row=document.createElement('div');row.className='recipe';for(const [i,ing] of [r.a,r.b].entries()){if(i){const plus=document.createElement('span');plus.textContent='+';row.append(plus);}const b=document.createElement('button');b.textContent=displayName(ing);b.onclick=()=>entry(ing);row.append(b);}const equal=document.createElement('span');equal.textContent='=';row.append(equal,document.createTextNode(displayName(item)));$('recipes').append(row);}
+ for(const r of tried){const row=document.createElement('div');row.className='recipe';for(const [i,ing] of [r.a,r.b].entries()){if(i){const plus=document.createElement('span');plus.textContent='+';row.append(plus);}const b=document.createElement('button');b.textContent=displayName(ing);b.onclick=()=>entry(ing);row.append(b);}const equal=document.createElement('span');equal.textContent='=';row.append(equal,document.createTextNode(r.outputs?r.outputs.map(displayName).join(' + '):displayName(item)));$('recipes').append(row);}
 }
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  $('drink').onclick=()=>{hideTooltip();const outcome=drink(state);save();render();if(outcome==='vampire'){ $('discovery').textContent='Congratulation, you are now an Vampire';setTimeout(()=>$('discovery').textContent='',4000);}if(state.effect)runEffect();};

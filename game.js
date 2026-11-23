@@ -25,8 +25,10 @@ for(const recipe of [...RECIPES])for(const [name,{liquid}] of Object.entries(CON
  if(recipe.b===liquid&&!['Glass Vessel','Pot'].includes(recipe.a))RECIPES.push({a:recipe.a,b:name,out:output,id:key(recipe.a,name)});
 }
 export const ITEMS=[...new Set([...BASES,...RECIPES.flatMap(r=>[r.a,r.b,r.out])])];
+export const MULTI_RECIPES=[{a:'Jesus',b:'Cross',outputs:[...BASES],id:key('Jesus','Cross')}];
+const multiLookup=new Map(MULTI_RECIPES.map(r=>[r.id,r.outputs]));
 const lookup=new Map(RECIPES.map(r=>[r.id,r.out]));
-export function combine(a,b){return a===b?a:lookup.get(key(a,b))||null;}
+export function combine(a,b){return a===b?a:lookup.get(key(a,b))||multiLookup.get(key(a,b))?.slice()||null;}
 export function fresh(){return {version:2,slots:Array(28).fill(null),mix:[],result:false,discovered:[...BASES],known:[],vampire:false,dead:false,started:false,effect:null,achievement:false};}
 export function migrate(saved){
  if(!saved||![1,2].includes(saved.version))return fresh();
@@ -35,7 +37,7 @@ export function migrate(saved){
  const poisonName=x=>x==='Gu Poison'?'Poison':x;
  s.slots=s.slots.map(x=>x&&poisonName(x));s.mix=s.mix.map(m=>({...m,item:poisonName(m.item)}));s.discovered=[...new Set(s.discovered.map(poisonName))];s.known=s.known.map(id=>id.split('|').map(poisonName).sort().join('|'));
  if(s.discovered.length<ITEMS.length)s.achievement=false;
- if(s.version===1){s.slots=s.slots.map(x=>x&&rename(x));s.mix=s.mix.map(m=>({...m,item:rename(m.item)}));s.discovered=[...new Set(s.discovered.map(rename))];s.known=s.known.map(id=>id.split('|').map(rename).sort().join('|')).filter(id=>RECIPES.some(r=>r.id===id)||id.split('|')[0]===id.split('|')[1]);s.achievement=false;s.version=2;}
+ if(s.version===1){s.slots=s.slots.map(x=>x&&rename(x));s.mix=s.mix.map(m=>({...m,item:rename(m.item)}));s.discovered=[...new Set(s.discovered.map(rename))];s.known=s.known.map(id=>id.split('|').map(rename).sort().join('|')).filter(id=>RECIPES.some(r=>r.id===id)||MULTI_RECIPES.some(r=>r.id===id)||id.split('|')[0]===id.split('|')[1]);s.achievement=false;s.version=2;}
  if(s.slots?.length!==28||s.slots.some(x=>x!==null&&!ITEMS.includes(x))||s.mix.length>1||s.mix.some(m=>!ITEMS.includes(m.item))||s.discovered.some(x=>!ITEMS.includes(x)))return fresh();
  return s;
 }
@@ -53,6 +55,7 @@ export function addIngredient(s,item,origin=null){
  if(([a.item,b.item].some(x=>['Fire','Campfire'].includes(x)))&&([a.item,b.item].some(x=>['Gunpowder','Bomb'].includes(x)))){s.mix=[];s.result=false;s.effect={type:'explosion'};return {type:'explosion'};}
  const out=combine(a.item,b.item);
  if(!out){const returning=hadResult?[b]:[a,b];for(const m of returning)if(m.origin!==null)s.slots[m.origin]=m.item;s.mix=hadResult?[a]:[];s.result=hadResult;return {type:'failed',returning};}
+ if(Array.isArray(out)){for(const item of out)discover(s,item,a.item,b.item);s.mix=[];s.result=false;return {type:'returned-to-bases',items:out};}
  const isNew=discover(s,out,a.item,b.item);s.mix=[{item:out,origin:null}];s.result=true;
  return {type:'created',item:out,isNew};
 }

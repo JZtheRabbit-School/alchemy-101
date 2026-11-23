@@ -78,3 +78,6 @@ A copy-ready package is available in codepen/ with HTML, CSS, JavaScript, and se
 
 Poison and Curse can now be drunk when placed alone in the beaker. Drinking effects depend on the player's condition.
 
+
+Some mixtures can produce several results that return directly to the permanent basic-element shelf. The beaker becomes available again after the return animation.
+

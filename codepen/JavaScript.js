@@ -140,9 +140,15 @@
           RECIPES.push({ a: recipe.a, b: name, out: output, id: key(recipe.a, name) });
       }
     const ITEMS = [...new Set([...BASES, ...RECIPES.flatMap((r) => [r.a, r.b, r.out])])];
+    const MULTI_RECIPES = [
+      { a: "Jesus", b: "Cross", outputs: [...BASES], id: key("Jesus", "Cross") },
+    ];
+    const multiLookup = new Map(MULTI_RECIPES.map((r) => [r.id, r.outputs]));
     const lookup = new Map(RECIPES.map((r) => [r.id, r.out]));
     function combine(a, b) {
-      return a === b ? a : lookup.get(key(a, b)) || null;
+      return a === b
+        ? a
+        : lookup.get(key(a, b)) || multiLookup.get(key(a, b))?.slice() || null;
     }
     function fresh() {
       return {
@@ -178,7 +184,9 @@
           .map((id) => id.split("|").map(rename).sort().join("|"))
           .filter(
             (id) =>
-              RECIPES.some((r) => r.id === id) || id.split("|")[0] === id.split("|")[1],
+              RECIPES.some((r) => r.id === id) ||
+              MULTI_RECIPES.some((r) => r.id === id) ||
+              id.split("|")[0] === id.split("|")[1],
           );
         s.achievement = false;
         s.version = 2;
@@ -238,6 +246,12 @@
         s.mix = hadResult ? [a] : [];
         s.result = hadResult;
         return { type: "failed", returning };
+      }
+      if (Array.isArray(out)) {
+        for (const item of out) discover(s, item, a.item, b.item);
+        s.mix = [];
+        s.result = false;
+        return { type: "returned-to-bases", items: out };
       }
       const isNew = discover(s, out, a.item, b.item);
       s.mix = [{ item: out, origin: null }];
@@ -1537,6 +1551,10 @@
           return;
         }
         render();
+        if (outcome.type === "returned-to-bases") {
+          await animateBaseReturn(outcome.items);
+          return;
+        }
         if (outcome.type === "explosion") {
           runEffect();
           return;
@@ -1597,6 +1615,77 @@
         setTimeout(() => n.remove(), 650);
       }
       $("contents").replaceChildren(...state.mix.map((m) => itemNode(m.item, "mix")));
+    }
+    async function animateBaseReturn(items) {
+      const token = effectToken;
+      busy = true;
+      document.body.classList.add("busy");
+      const box = $("contents").getBoundingClientRect(),
+        nodes = [];
+      try {
+        await Promise.all(
+          items.map(async (item, i) => {
+            const n = document.createElement("div");
+            n.className = "return-ghost";
+            n.style.transition = "none";
+            n.style.width = "74px";
+            n.style.height = "74px";
+            n.innerHTML = art(item);
+            const angle = (i * Math.PI) / 2 - Math.PI / 2,
+              x = box.left + box.width / 2 - 37 + Math.cos(angle) * 58,
+              y = box.top + box.height * 0.65 - 37 + Math.sin(angle) * 58;
+            n.style.left = x + "px";
+            n.style.top = y + "px";
+            document.body.append(n);
+            nodes.push(n);
+            await delay(850);
+            if (token !== effectToken) return;
+            const target = document.querySelector('[data-base="' + item + '"]'),
+              b = target.getBoundingClientRect();
+            await n.animate(
+              [
+                { transform: "translate(0,0) scale(1)", opacity: 1 },
+                {
+                  transform:
+                    "translate(" +
+                    (b.left + b.width / 2 - 37 - x) * 0.35 +
+                    "px," +
+                    (b.top - 75 - y) +
+                    "px) scale(.8)",
+                  opacity: 1,
+                  offset: 0.5,
+                },
+                {
+                  transform:
+                    "translate(" +
+                    (b.left + b.width / 2 - 37 - x) +
+                    "px," +
+                    (b.top + b.height / 2 - 37 - y) +
+                    "px) scale(.55)",
+                  opacity: 0,
+                },
+              ],
+              { duration: 1400, delay: i * 150, easing: "ease-in-out", fill: "forwards" },
+            ).finished;
+            if (token === effectToken)
+              target.animate(
+                [
+                  { filter: "brightness(2.2) drop-shadow(0 0 18px #f4dfa1)" },
+                  { filter: "none" },
+                ],
+                { duration: 800 },
+              );
+            n.remove();
+          }),
+        );
+      } finally {
+        nodes.forEach((n) => n.remove());
+        if (token === effectToken) {
+          busy = false;
+          document.body.classList.remove("busy");
+          render();
+        }
+      }
     }
     function reset() {
       effectToken++;
@@ -1723,7 +1812,12 @@
         "A preparation of uncertain composition. The confidence of its maker is not a scientific instrument.";
       $("right-page").innerHTML =
         `<h2>${displayName(item)}</h2><p>${desc}</p><h3>Known recipes</h3><div id="recipes"></div>`;
-      const tried = RECIPES.filter((r) => r.out === item && state.known.includes(r.id));
+      const tried = [
+        ...RECIPES.filter((r) => r.out === item && state.known.includes(r.id)),
+        ...MULTI_RECIPES.filter(
+          (r) => r.outputs.includes(item) && state.known.includes(r.id),
+        ),
+      ];
       if (state.known.includes([item, item].join("|")))
         tried.push({ a: item, b: item, out: item });
       if (!tried.length) {
@@ -1750,7 +1844,12 @@
         }
         const equal = document.createElement("span");
         equal.textContent = "=";
-        row.append(equal, document.createTextNode(displayName(item)));
+        row.append(
+          equal,
+          document.createTextNode(
+            r.outputs ? r.outputs.map(displayName).join(" + ") : displayName(item),
+          ),
+        );
         $("recipes").append(row);
       }
     }

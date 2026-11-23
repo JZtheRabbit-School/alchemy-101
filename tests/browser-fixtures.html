@@ -1,9 +1,10 @@
 <!doctype html><meta charset="utf-8"><title>Alchemy browser QA fixtures</title>
 <p>Development-only test fixtures. Open in a separate tab: choosing a fixture replaces this tab's test run.</p>
 <button id="normal">Container and new-art fixture</button><button id="vampire">Vampire fixture</button>
-<button id="explosion">Explosive mixing fixture</button><button id="intoxication">Ten-second distortion fixture</button><button id="love">Love Potion sequence</button><script type="module">
+<button id="explosion">Explosive mixing fixture</button><button id="intoxication">Ten-second distortion fixture</button><button id="love">Love Potion sequence</button><button id="four-elements">Jesus + Cross in game</button><script type="module">
 import {fresh,ITEMS,RECIPES} from '../game.js';
 function start(vampire){const s=fresh();s.started=true;s.vampire=vampire;s.discovered=[...ITEMS];s.known=RECIPES.filter(r=>['Vine','Wine','Holy Water','A Glass of Holy Water'].includes(r.out)).map(r=>r.id);s.achievement=true;s.slots=['Holy Water','Glass Vessel','Jesus','Cross','A Glass of Sacred Blood','A Pot of Holy Water','Vine','Grape','Pulp','Wine','Raisins','Raisins Bread','Magma','A Glass of Frog','A Pot of Frog','Glass Pane','A Glass of Blood','Pot',...Array(10).fill(null)];sessionStorage.setItem('alchemy101.prototype.v1',JSON.stringify(s));location.href='/';}
+document.querySelector('#four-elements').onclick=()=>{const s=fresh();s.started=true;s.mix=[{item:'Jesus',origin:null}];s.result=true;s.slots[0]='Cross';s.discovered.push('Jesus','Cross');sessionStorage.setItem('alchemy101.prototype.v1',JSON.stringify(s));location.href='/';};
 document.querySelector('#love').onclick=()=>{const s=fresh();s.started=true;s.mix=[{item:'Love Potion',origin:null}];s.result=true;s.discovered.push('Love Potion');sessionStorage.setItem('alchemy101.prototype.v1',JSON.stringify(s));location.href='/';};
 document.querySelector('#intoxication').onclick=()=>{const s=fresh();s.started=true;s.effect={type:'visions',vessel:'Glass Vessel'};sessionStorage.setItem('alchemy101.prototype.v1',JSON.stringify(s));location.href='/';};
 document.querySelector('#explosion').onclick=()=>{const s=fresh();s.started=true;s.mix=[{item:'Gunpowder',origin:null}];s.result=true;s.discovered.push('Gunpowder');sessionStorage.setItem('alchemy101.prototype.v1',JSON.stringify(s));location.href='/';};

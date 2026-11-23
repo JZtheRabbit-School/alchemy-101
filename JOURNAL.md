@@ -498,3 +498,22 @@ Slash alternatives expand into separate unordered recipes. Water/glass/pot item 
 ## 2026-11-23 — publish blood recipe updates
 - User authorized GitHub push. Only the JavaScript panel needs replacing in CodePen; HTML and CSS remain unchanged. Includes blood cursing with preserved containers, two-stage Jesus purification, and Jesus + Wine producing A Glass of Sacred Blood. All 35 checks and bundled JavaScript syntax pass.
 
+
+## 2026-11-23 — Jesus + Cross four-element preview
+- User requested a separate-window preview before adding the recipe. Added an isolated demo with Jesus in the beaker and a draggable Cross, plus Show combination/Reset controls. The pair vanishes, four elements emerge, then fly separately to their matching Shelf B slots. Permanent base elements remain available; no duplicates or new discoveries are added.
+- Main recipe logic, CodePen copy and saved runs are unchanged pending preview review. Local demo only; no commit or push.
+
+
+## 2026-11-23 — immediate four-element preview combination
+- Removed the demo's 550 ms pause displaying Jesus and Cross together. Inputs now disappear and four outputs appear immediately, matching ordinary mixing timing. The output display and return flight remain unchanged. Preview only; no commit or push.
+
+
+## 2026-11-23 — visible Cross dragging in demo
+- Added a pointer-following Cross illustration during mouse/touch dragging, dimmed its source item, and cleaned it up on release/cancel. Dropping outside the beaker leaves the Cross available. Preview only; no commit or push.
+
+
+## 2026-11-23 — integrate and publish Jesus + Cross
+- Approved demo integrated into main game: Jesus + Cross immediately yields Fire, Water, Air and Earth, which emerge and fly to their matching permanent Shelf B slots. Inputs are consumed, beaker empties, no extra shelf slots or duplicate bases are created. Recipe works both orders, including a newly made ingredient in the beaker.
+- Added a separate multi-output recipe definition and journal support showing all four outputs under each basic element after trying it. Save recovery retains the recorded recipe; vampires remain unable to touch Jesus/Cross.
+- All 37 checks and app/bundled-JavaScript syntax pass. Browser verified actual Cross drag, consumption, completed return, and Fire journal entry showing Jesus + Cross = Fire + Water + Air + Earth. Formatted CodePen JavaScript and ZIP refreshed; HTML and CSS unchanged. User authorized GitHub push.
+
